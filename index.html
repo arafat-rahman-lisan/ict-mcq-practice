@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MCQ Practice | সংখ্যা পদ্ধতি ও ডিজিটাল সিস্টেম</title>
+  <title>ICT MCQ Practice | Multi Chapter Exam</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,20 +13,24 @@
   <div class="app-shell">
     <header class="hero">
       <nav class="topbar">
-        <div class="brand">
+        <button class="brand" id="homeBtn" type="button" title="Home">
           <span class="brand-icon">✦</span>
           <span>ICT MCQ Practice</span>
+        </button>
+        <div class="top-actions">
+          <button class="btn exam-start" id="startExamBtnTop" type="button">🎯 Exam: 100 Random MCQ</button>
+          <div class="pill" id="totalPill">Loading...</div>
         </div>
-        <div class="pill" id="totalPill">Loading...</div>
       </nav>
+
       <section class="hero-content">
         <div>
-          <p class="eyebrow">Class Practice Website</p>
-          <h1>সংখ্যা পদ্ধতি ও ডিজিটাল সিস্টেম</h1>
-          <p class="subtitle">MCQ practice, instant answer checking, progress tracking, and Gemini-powered explanation button for every question.</p>
+          <p class="eyebrow" id="modeLabel">Chapter Practice + Final Exam</p>
+          <h1 id="pageTitle">ICT MCQ Practice</h1>
+          <p class="subtitle" id="pageSubtitle">Choose a chapter for practice with Explain button, or start a 100-question mixed exam.</p>
         </div>
         <div class="score-card">
-          <span>Score</span>
+          <span id="scoreLabel">Practice Score</span>
           <strong id="scoreText">0 / 0</strong>
           <small id="progressText">No answers yet</small>
         </div>
@@ -34,10 +38,27 @@
     </header>
 
     <main>
-      <section class="controls card">
+      <section class="chapter-grid" id="chapterGrid" aria-label="Chapter selection"></section>
+
+      <section class="exam-panel card" id="examIntro">
+        <div>
+          <span class="tag gold">Mixed Exam Mode</span>
+          <h2>১০০টি Random MCQ Exam</h2>
+          <p>প্রতিবার ক্লিক করলে সব অধ্যায় থেকে নতুন ১০০টি random MCQ আসবে। Exam চলাকালীন উত্তর দেখা যাবে না। Submit করার পর একসাথে score এবং correct answer দেখা যাবে।</p>
+        </div>
+        <button class="btn exam-start big" id="startExamBtn" type="button">Start New 100 MCQ Exam</button>
+      </section>
+
+      <section class="controls card" id="practiceControls">
         <div class="field search-field">
           <label for="searchInput">Search MCQ</label>
           <input id="searchInput" type="search" placeholder="প্রশ্ন, অপশন বা উত্তর লিখুন..." />
+        </div>
+        <div class="field">
+          <label for="chapterFilter">Chapter</label>
+          <select id="chapterFilter">
+            <option value="all">সব অধ্যায়</option>
+          </select>
         </div>
         <div class="field">
           <label for="topicFilter">Topic</label>
@@ -59,7 +80,19 @@
         <button class="btn ghost" id="resetBtn" type="button">Reset Progress</button>
       </section>
 
+      <section class="exam-toolbar card" id="examToolbar" hidden>
+        <div>
+          <span class="tag gold">Exam Running</span>
+          <h2>Mixed 100 MCQ Exam</h2>
+          <p id="examInfo">Answer all questions. You will see the correct answers only after submission.</p>
+        </div>
+        <div class="exam-actions">
+          <button class="btn ghost" id="newExamBtn" type="button">New Random Exam</button>
+          <button class="btn exam-submit" id="submitExamBtn" type="button">Submit Exam</button>
+        </div>
+      </section>
 
+      <section class="exam-result card" id="examResult" hidden></section>
 
       <section id="mcqList" class="mcq-list" aria-live="polite"></section>
     </main>
