@@ -3,7 +3,8 @@ const state = {
   answers: JSON.parse(localStorage.getItem('mcqAnswers') || '{}'),
   bookmarks: JSON.parse(localStorage.getItem('mcqBookmarks') || '[]'),
   explanations: JSON.parse(localStorage.getItem('mcqExplanations') || '{}'),
-  filters: { search: '', topic: 'all', status: 'all' }
+  filters: { search: '', topic: 'all', status: 'all' },
+  activeQuestion: null
 };
 
 const $ = (id) => document.getElementById(id);
@@ -119,9 +120,47 @@ function render() {
   }).join('');
 }
 
-function showDialog(content) {
-  $('explainContent').textContent = content;
-  $('explainDialog').showModal();
+function openDialog() {
+  if (!$('explainDialog').open) {
+    $('explainDialog').showModal();
+  }
+}
+
+function hideFollowup() {
+  $('followupBox').hidden = true;
+  $('followupInput').value = '';
+  $('followupHistory').innerHTML = '';
+}
+
+function showPlainDialog(title, content) {
+  $('dialogTitle').textContent = title;
+  $('explainContent').innerHTML = `<div class="answer-block">${escapeHtml(content)}</div>`;
+  hideFollowup();
+  openDialog();
+}
+
+function showLoadingDialog(q) {
+  state.activeQuestion = q;
+  $('dialogTitle').textContent = 'Explanation ✨';
+  $('explainContent').innerHTML = `
+    <div class="cool-loader">
+      <div class="loader-orb" aria-hidden="true"></div>
+      <h3>Preparing a clear explanation<span class="loading-dots"></span></h3>
+      <p>AI teacher is reading the MCQ, checking the correct answer, and making it easy for students.</p>
+    </div>`;
+  hideFollowup();
+  openDialog();
+}
+
+function showExplanationDialog(q, text) {
+  state.activeQuestion = q;
+  $('dialogTitle').textContent = `Explanation for MCQ #${q.id} ✨`;
+  $('explainContent').innerHTML = `<div class="answer-block">${escapeHtml(text)}</div>`;
+  $('followupBox').hidden = false;
+  $('followupInput').value = '';
+  $('followupHistory').innerHTML = '';
+  openDialog();
+  setTimeout(() => $('followupInput').focus(), 80);
 }
 
 function makePrompt(q) {
@@ -149,30 +188,85 @@ ${q.correctLetter}) ${getOptionText(q, q.correctLetter)}
 `;
 }
 
+async function callExplainApi(prompt, questionId) {
+  const res = await fetch(window.EXPLAIN_API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt, questionId })
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || `Request failed: ${res.status}`);
+  return data.explanation || 'No explanation returned.';
+}
+
 async function explain(q) {
   if (state.explanations[q.id]) {
-    showDialog(state.explanations[q.id]);
+    showExplanationDialog(q, state.explanations[q.id]);
     return;
   }
   if (!window.EXPLAIN_API_URL) {
-    showDialog('Explain API এখনো সেট করা হয়নি।\n\n১) Cloudflare Worker deploy করুন।\n২) Worker URL কপি করুন।\n৩) github-pages-site/config.js ফাইলে EXPLAIN_API_URL এর মধ্যে বসান।\n\nAPI key কখনো এই static site-এ রাখবেন না।');
+    showPlainDialog('Explanation setup needed', 'Explain API এখনো সেট করা হয়নি।\n\n১) Cloudflare Worker deploy করুন।\n২) Worker URL কপি করুন।\n৩) github-pages-site/config.js ফাইলে EXPLAIN_API_URL এর মধ্যে বসান।\n\nAPI key কখনো এই static site-এ রাখবেন না।');
     return;
   }
-  showDialog('Gemini explanation loading...');
+  showLoadingDialog(q);
   try {
-    const res = await fetch(window.EXPLAIN_API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt: makePrompt(q), questionId: q.id })
-    });
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(data.error || `Request failed: ${res.status}`);
-    const text = data.explanation || 'No explanation returned.';
+    const text = await callExplainApi(makePrompt(q), q.id);
     state.explanations[q.id] = text;
     saveProgress();
-    showDialog(text);
+    showExplanationDialog(q, text);
   } catch (err) {
-    showDialog(`Explanation failed.\n\nReason: ${err.message}\n\nCheck Worker URL, CORS origin, and Gemini API key.`);
+    showPlainDialog('Explanation failed', `Reason: ${err.message}\n\nCheck Worker URL, CORS origin, and Gemini API key.`);
+  }
+}
+
+async function askFollowup() {
+  const q = state.activeQuestion;
+  const studentQuestion = $('followupInput').value.trim();
+  if (!q || !studentQuestion) return;
+  if (!window.EXPLAIN_API_URL) {
+    showPlainDialog('Explanation setup needed', 'Explain API URL is missing in config.js.');
+    return;
+  }
+
+  const btn = $('askFollowupBtn');
+  const history = $('followupHistory');
+  const previousExplanation = state.explanations[q.id] || $('explainContent').innerText || '';
+
+  history.insertAdjacentHTML('beforeend', `<div class="followup-item student"><strong>Student asked:</strong>\n${escapeHtml(studentQuestion)}</div>`);
+  const loadingId = `followup-loading-${Date.now()}`;
+  history.insertAdjacentHTML('beforeend', `<div id="${loadingId}" class="followup-item loading">Thinking<span class="loading-dots"></span></div>`);
+
+  btn.disabled = true;
+  btn.textContent = 'Asking...';
+
+  try {
+    const followupPrompt = `তুমি একজন ধৈর্যশীল ICT শিক্ষক। একজন শিক্ষার্থী MCQ ব্যাখ্যার পরেও একটি follow-up প্রশ্ন করেছে।
+
+মূল MCQ তথ্য:
+${makePrompt(q)}
+
+আগের ব্যাখ্যা:
+${previousExplanation}
+
+শিক্ষার্থীর প্রশ্ন:
+${studentQuestion}
+
+এখন শিক্ষার্থীর follow-up প্রশ্নের উত্তর সহজ বাংলায় দাও। খুব বড় করবে না। প্রয়োজন হলে ছোট উদাহরণ দাও।`;
+
+    const answer = await callExplainApi(followupPrompt, q.id);
+    const loadingEl = document.getElementById(loadingId);
+    if (loadingEl) {
+      loadingEl.outerHTML = `<div class="followup-item ai"><strong>AI replied:</strong>\n${escapeHtml(answer)}</div>`;
+    }
+    $('followupInput').value = '';
+  } catch (err) {
+    const loadingEl = document.getElementById(loadingId);
+    if (loadingEl) {
+      loadingEl.outerHTML = `<div class="followup-item ai"><strong>Failed:</strong> ${escapeHtml(err.message)}</div>`;
+    }
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Ask Explanation';
   }
 }
 
@@ -225,6 +319,12 @@ $('resetBtn').addEventListener('click', () => {
   render();
 });
 $('closeDialog').addEventListener('click', () => $('explainDialog').close());
+$('askFollowupBtn').addEventListener('click', askFollowup);
+$('followupInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+    askFollowup();
+  }
+});
 
 async function init() {
   const res = await fetch('data/mcqs.json');

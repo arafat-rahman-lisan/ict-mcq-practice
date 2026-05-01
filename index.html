@@ -70,10 +70,18 @@
 
   <dialog id="explainDialog" class="explain-dialog">
     <div class="dialog-head">
-      <h2>AI Explanation</h2>
+      <h2 id="dialogTitle">Explanation ✨</h2>
       <button class="icon-btn" id="closeDialog" aria-label="Close">×</button>
     </div>
     <div id="explainContent" class="explain-content"></div>
+    <div id="followupBox" class="followup-box" hidden>
+      <label for="followupInput">Still confused? Ask your own question</label>
+      <textarea id="followupInput" rows="3" placeholder="Example: আমি এখনো বুঝিনি কেন এই উত্তরটি সঠিক..."></textarea>
+      <div class="followup-actions">
+        <button class="btn explain" id="askFollowupBtn" type="button">Ask Explanation</button>
+      </div>
+      <div id="followupHistory" class="followup-history"></div>
+    </div>
   </dialog>
 
   <script src="config.js"></script>
