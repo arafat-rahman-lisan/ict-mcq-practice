@@ -1,0 +1,3365 @@
+{
+  "title": "সংখ্যা পদ্ধতি ও ডিজিটাল সিস্টেম",
+  "sourceFile": "organized_mcqs_chapter_3(6).docx",
+  "total": 116,
+  "mcqs": [
+    {
+      "id": 1,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "শুণ্য এর ব্যবহার ছিল না কোন সংখ্যা পদ্ধতিতে?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "রোমান ও ইউরোপিয়ান সংখ্যা পদ্ধতিতে"
+        },
+        {
+          "label": "খ",
+          "text": "ভারতীয় ও আরবীয়দের সংখ্যা পদ্ধতিতে"
+        },
+        {
+          "label": "গ",
+          "text": "ভারতীয় ও উপমহাদেশে"
+        },
+        {
+          "label": "ঘ",
+          "text": "আরবীয়দের সংখ্যা পদ্ধতিতে"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) রোমান ও ইউরোপিয়ান সংখ্যা পদ্ধতিতে",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 2,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "ভগ্নাংশ সংখ্যা সর্বপ্রথম প্রবর্তন হয় কোথায়?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "গ্রিকে"
+        },
+        {
+          "label": "খ",
+          "text": "ইরাকে"
+        },
+        {
+          "label": "গ",
+          "text": "ভারতে"
+        },
+        {
+          "label": "ঘ",
+          "text": "মিসরে"
+        }
+      ],
+      "correctLetter": "ঘ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ঘ) মিসরে",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 3,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "প্রাচীন ব্যাবিলনের মানুষের বড় সংখ্যা প্রকাশের জন্য কত ভিত্তিক সংখ্যা ব্যবহার করতেন?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "০২ ভিত্তিক"
+        },
+        {
+          "label": "খ",
+          "text": "০৪ ভিত্তিক"
+        },
+        {
+          "label": "গ",
+          "text": "৩০ ভিত্তিক"
+        },
+        {
+          "label": "ঘ",
+          "text": "৬০ ভিত্তিক"
+        }
+      ],
+      "correctLetter": "ঘ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ঘ) ৬০ ভিত্তিক",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 4,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বাইনারি ডিজিটকে সংক্ষেপে বলে-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "বাইট"
+        },
+        {
+          "label": "খ",
+          "text": "বিট"
+        },
+        {
+          "label": "গ",
+          "text": "কিলোবাইট"
+        },
+        {
+          "label": "ঘ",
+          "text": "বাডিজিট"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) বিট",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 5,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "সর্বপ্রথম ইনফিনিটি বা অসীম (∞ ) এর আবিস্কার কে প্রচলন করেন?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "পিথাগোরাস"
+        },
+        {
+          "label": "খ",
+          "text": "নিউটন"
+        },
+        {
+          "label": "গ",
+          "text": "এরিস্টটল"
+        },
+        {
+          "label": "ঘ",
+          "text": "গ্যালিলিও"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) এরিস্টটল",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 6,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বর্তমান গণিতের জন্ম হয়েছে-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "অংক থেকে"
+        },
+        {
+          "label": "খ",
+          "text": "গণনা থেকে"
+        },
+        {
+          "label": "গ",
+          "text": "গণিত থেকে"
+        },
+        {
+          "label": "ঘ",
+          "text": "সংখ্যা থেকে"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) গণনা থেকে",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 7,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "কোন সংখ্যা পদ্ধতি শুধু মানের উপর নির্ভর করে না এবং তা অবস্থানের উপর নির্ভর করে?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "অক্টাল সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "খ",
+          "text": "বাইনারি সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "গ",
+          "text": "পজিশনাল সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "ঘ",
+          "text": "নন-পজিশনাল সংখ্যা পদ্ধতি"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) পজিশনাল সংখ্যা পদ্ধতি।",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 8,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "প্রায় ৫০০ খ্রিস্টাব্দের দিকে এ্যারাবয়ানরা ভারতীয়দের কাছ থেকে কোন পদ্ধতি আয়ত্ত করেন?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "বাইনারি সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "খ",
+          "text": "অক্টাল সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "গ",
+          "text": "পজিশনাল সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "ঘ",
+          "text": "নন-পজিশনাল সংখ্যা পদ্ধতি"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) পজিশনাল সংখ্যা পদ্ধতি",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 9,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "আরবরা গণনা পদ্ধতিতে আয়ত্ব করেছিলেন কাদের কাছ থেকে?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "চীনদের কাছ থেকে"
+        },
+        {
+          "label": "খ",
+          "text": "গ্রিকদের কাছ থেকে"
+        },
+        {
+          "label": "গ",
+          "text": "ভারতীয়দের কাছ থেকে"
+        },
+        {
+          "label": "ঘ",
+          "text": "মিসরীয়দের কাছ থেকে"
+        }
+      ],
+      "correctLetter": "ঘ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ঘ) মিসরীয়দের কাছ থেকে",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 10,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "মানুষ কম্পিউটারে কোন সংখ্যা পদ্ধতি ব্যবহারে ইনপুট প্রদান করে?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "দশমিক সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "খ",
+          "text": "বাইনারি সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "গ",
+          "text": "অকটাল সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "ঘ",
+          "text": "হেক্সাডেসিমেল"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) দশমিক সংখ্যা পদ্ধতি",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 11,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "কম্পিউটার যে সংখ্যা ব্যবহার করে কাজ সম্পূর্ণ করে সে সংখ্যা পদ্ধতি কোনটি-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "দশমিক সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "খ",
+          "text": "বাইনারি সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "গ",
+          "text": "অকটাল সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "ঘ",
+          "text": "হেক্সাডেসিমেল"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) বাইনারি সংখ্যা পদ্ধতি",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 12,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "দশমিক সংখ্যা পদ্ধতির বেজ কত?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "02 বেজ"
+        },
+        {
+          "label": "খ",
+          "text": "08 বেজ"
+        },
+        {
+          "label": "গ",
+          "text": "10 বেজ"
+        },
+        {
+          "label": "ঘ",
+          "text": "16 বেজ"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) 10",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 13,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "দশমিক সংখ্যা পদ্ধতির অংক কতটি?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "16 টি"
+        },
+        {
+          "label": "খ",
+          "text": "02 টি"
+        },
+        {
+          "label": "গ",
+          "text": "08 টি"
+        },
+        {
+          "label": "ঘ",
+          "text": "10 টি"
+        }
+      ],
+      "correctLetter": "ঘ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ঘ) 10",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 14,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "প্রাচীন মিসরীয় শিলালিপিতে “⌒” চিহ্ন দ্বারা নিচের কোন দশমিক সংখ্যা প্রকাশ করা হয়।",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১"
+        },
+        {
+          "label": "খ",
+          "text": "১০"
+        },
+        {
+          "label": "গ",
+          "text": "১০০"
+        },
+        {
+          "label": "ঘ",
+          "text": "১০০০০"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) ১০",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 15,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "মৌলিক চিহ্ন ব্যবহৃত হয় দশমিক সংখ্যা পদ্ধতিতে-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "০৮টি"
+        },
+        {
+          "label": "খ",
+          "text": "১০টি"
+        },
+        {
+          "label": "গ",
+          "text": "০২টি"
+        },
+        {
+          "label": "ঘ",
+          "text": "১৬ট"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) ১০টি",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 16,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "ডেসিমেল ১৬ দ্বারা বাইনরি সংখ্যা পদ্ধতির মান কত?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "1010"
+        },
+        {
+          "label": "খ",
+          "text": "1110"
+        },
+        {
+          "label": "গ",
+          "text": "10000"
+        },
+        {
+          "label": "ঘ",
+          "text": "1111"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) 10000",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 17,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বর্তমান সময়ে আলোচিত IPV6 পদ্ধতিটি নিচের কোন সংখ্যা পদ্ধতির উপর ভিত্তি করে তৈরি?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "দশমিক সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "খ",
+          "text": "বাইনারি সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "গ",
+          "text": "অকটাল সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "ঘ",
+          "text": "হেক্সাডেসিমেল"
+        }
+      ],
+      "correctLetter": "ঘ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ঘ) হেক্সাডেসিমেল",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 18,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "(AB)16 হেক্সাডেসিমেল সংখ্যার বাইনারি সমতুল্য মান-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "(১০১১১০১০)২"
+        },
+        {
+          "label": "খ",
+          "text": "(১০১০১০১১) ২"
+        },
+        {
+          "label": "গ",
+          "text": "(১০০১০১১০) ২"
+        },
+        {
+          "label": "ঘ",
+          "text": "(১০১১০০০১) ২"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) (১০১০১০১১) ২",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 19,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "(১০১০১.১০১)২ সংখ্যাটির অক্টাল মান-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "(২৫.৫)৮"
+        },
+        {
+          "label": "খ",
+          "text": "(২৪.৫)৮"
+        },
+        {
+          "label": "গ",
+          "text": "(৫২)৮"
+        },
+        {
+          "label": "ঘ",
+          "text": "(২৫.৬)৮"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) (২৫.৫)৮",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 20,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "(০.২৬) ৮ বাইনারি মান-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "(০.১০০১১)২"
+        },
+        {
+          "label": "খ",
+          "text": "(০.১০০০১১)২"
+        },
+        {
+          "label": "গ",
+          "text": "(০.০১০১১০)২"
+        },
+        {
+          "label": "ঘ",
+          "text": "(০.০১০১০১১০)২"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) (০.০১০১১০)২",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 21,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "(১.২৫)১০ বাইনারিতে রুপান্তর করলে কত হবে?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "(০.০২৫)২"
+        },
+        {
+          "label": "খ",
+          "text": "(১.০১)২"
+        },
+        {
+          "label": "গ",
+          "text": "(২.০৫)২"
+        },
+        {
+          "label": "ঘ",
+          "text": "(১০.১)২"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) (১.০১)২",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 22,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "কম্পিউটার গণিতে কয়টি সংখ্যা পদ্ধতি ব্যবহৃত হয়?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "3টি"
+        },
+        {
+          "label": "খ",
+          "text": "3টি"
+        },
+        {
+          "label": "গ",
+          "text": "4টি"
+        },
+        {
+          "label": "ঘ",
+          "text": "5টি"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) 4টি",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 23,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "উপস্থাপন প্রকাশের পদ্ধতির উপর ভিত্তি করে সংখ্যা পদ্ধতিকে কয়ভাগে ভাগ করা হয়?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "2 ভাগে"
+        },
+        {
+          "label": "খ",
+          "text": "3 ভাগে"
+        },
+        {
+          "label": "গ",
+          "text": "4 ভাগে"
+        },
+        {
+          "label": "ঘ",
+          "text": "6 ভাগে"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) 4 ভাগে",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 24,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "(২৮)১০ সংখ্যার অকটাল মান কত?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "(৩৪)৮"
+        },
+        {
+          "label": "খ",
+          "text": "( ৭৭)৮"
+        },
+        {
+          "label": "গ",
+          "text": "(২২)৮"
+        },
+        {
+          "label": "ঘ",
+          "text": "(৬৬)৮"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) (৩৪)৮",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 25,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বাইনারি ১১১১ এর দশমিক মান কোনটি?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১৪"
+        },
+        {
+          "label": "খ",
+          "text": "১৫"
+        },
+        {
+          "label": "গ",
+          "text": "১৬"
+        },
+        {
+          "label": "ঘ",
+          "text": "১৭"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) ১৫",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 26,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "অকটাল সংখ্যা পদ্ধতি ভিত্তি কত?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "০২ভিত্তি"
+        },
+        {
+          "label": "খ",
+          "text": "১০ভিত্তি"
+        },
+        {
+          "label": "গ",
+          "text": "০৮ভিত্তি"
+        },
+        {
+          "label": "ঘ",
+          "text": "১৬ভিত্তি"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) ০৮ ভিত্তি",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 27,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "কোন বাইনারি সংখ্যা দশমিক সমতূল্য ৩৬৮?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১০১১১০০০০"
+        },
+        {
+          "label": "খ",
+          "text": "১১০১১০০০০"
+        },
+        {
+          "label": "গ",
+          "text": "১১১০১০০০০"
+        },
+        {
+          "label": "ঘ",
+          "text": "১১১১০০০০০"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) ১০১১১০০০০",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 28,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "(৭৩৪)৮ হেক্সাডেসিমেল সমতুল্য মান-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১. CID"
+        },
+        {
+          "label": "খ",
+          "text": "২. DC1"
+        },
+        {
+          "label": "গ",
+          "text": "৩. CCD"
+        },
+        {
+          "label": "ঘ",
+          "text": "৪.1DC"
+        }
+      ],
+      "correctLetter": "ঘ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ঘ) 1DC",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 29,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "দশমিক 84 কে অকটাল সংখ্যায় পরিনত করলে কত হবে?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১২৪"
+        },
+        {
+          "label": "খ",
+          "text": "১২৫"
+        },
+        {
+          "label": "গ",
+          "text": "১২৭"
+        },
+        {
+          "label": "ঘ",
+          "text": "১২৮"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) ১২৪",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 30,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বাইনারি সংখ্যা ১০১১১ এর পূরক কত?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১১১১১"
+        },
+        {
+          "label": "খ",
+          "text": "০০১১১"
+        },
+        {
+          "label": "গ",
+          "text": "০১০০০"
+        },
+        {
+          "label": "ঘ",
+          "text": "১১০০০"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) ০১০০০",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 31,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "(১১১০১)২ এর দশমিক মান কত?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১৫"
+        },
+        {
+          "label": "খ",
+          "text": "১৮"
+        },
+        {
+          "label": "গ",
+          "text": "২৯"
+        },
+        {
+          "label": "ঘ",
+          "text": "৩১"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) ২৯",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 32,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "১১০০ ও ১১১ এর বাইনারি যোগ-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১১০০১"
+        },
+        {
+          "label": "খ",
+          "text": "১০০১০"
+        },
+        {
+          "label": "গ",
+          "text": "১০০১১"
+        },
+        {
+          "label": "ঘ",
+          "text": "১১০১০"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) ১০০১১",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 33,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বাইনারি বিয়োগ কয়টি নিয়ম মেনে চলে-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "২টি"
+        },
+        {
+          "label": "খ",
+          "text": "৪টি"
+        },
+        {
+          "label": "গ",
+          "text": "৩টি"
+        },
+        {
+          "label": "ঘ",
+          "text": "৫টি"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) ৪টি",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 34,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "১০১১ থেকে ১১০ এর বিয়োগফল বাইনারি নিয়মে-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১১০"
+        },
+        {
+          "label": "খ",
+          "text": "১১১"
+        },
+        {
+          "label": "গ",
+          "text": "১০১"
+        },
+        {
+          "label": "ঘ",
+          "text": "০১১"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) ১০১",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 35,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "হেক্সাডেসিমেল সংখ্যা পদ্ধতিতে B ও E এর যোগফল হবে-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "(25)16"
+        },
+        {
+          "label": "খ",
+          "text": "(F)16"
+        },
+        {
+          "label": "গ",
+          "text": "(19)16"
+        },
+        {
+          "label": "ঘ",
+          "text": "(BE)16"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) (19)16",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 36,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "হেক্সাডেসিমেল দুটি ডিজিটের যোগফল ১৬ এর নিচে হলে যে সংখ্যা হবে তাই হবে এবং ক্যারি হবে-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "০০"
+        },
+        {
+          "label": "খ",
+          "text": "০১"
+        },
+        {
+          "label": "গ",
+          "text": "১৬"
+        },
+        {
+          "label": "ঘ",
+          "text": "০৬"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) ০০",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 37,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "(১.৭৫)১০=()২",
+      "options": [
+        {
+          "label": "ক",
+          "text": "(১১.১)২"
+        },
+        {
+          "label": "খ",
+          "text": "(১.১১)২"
+        },
+        {
+          "label": "গ",
+          "text": "(১.১০১)২"
+        },
+        {
+          "label": "ঘ",
+          "text": "(১.০১১)২"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) (১.১১)২",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 38,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "(৬৪)৮ এর বাইনারি মান কত?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১১০১০০"
+        },
+        {
+          "label": "খ",
+          "text": "১০১০০১"
+        },
+        {
+          "label": "গ",
+          "text": "১১০১১০"
+        },
+        {
+          "label": "ঘ",
+          "text": "১১১০০১"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) ১১০১০০",
+      "topic": "সংখ্যা পদ্ধতি ও রূপান্তর"
+    },
+    {
+      "id": 39,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "চিহ্ন বা সাইনযুক্ত সংখ্যাকে বলে-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "চিহ্ন মুক্ত"
+        },
+        {
+          "label": "খ",
+          "text": "নম্বর"
+        },
+        {
+          "label": "গ",
+          "text": "সাইন্ড নম্বর"
+        },
+        {
+          "label": "ঘ",
+          "text": "বাইনারি নাম্বার"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) সাইন্ড নম্বর",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 40,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "চিহ্ন বোঝানোর জন্য সাধারণত ব্যবহার করা হয়-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "অতিরিক্ত বাইট"
+        },
+        {
+          "label": "খ",
+          "text": "অতিরিক্ত সংখ্যা"
+        },
+        {
+          "label": "গ",
+          "text": "অতিরিক্ত নম্বর"
+        },
+        {
+          "label": "ঘ",
+          "text": "অতিরিক্ত বিট"
+        }
+      ],
+      "correctLetter": "ঘ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ঘ) অতিরিক্ত বিট",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 41,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বাইনারি সংখ্যাকে কত বিটে প্রকাশ করা হবে তা নির্ভর করে রেজিষ্ট্যারের-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "বিটের উপর"
+        },
+        {
+          "label": "খ",
+          "text": "শব্দ দৈর্ঘ্যরে উপর"
+        },
+        {
+          "label": "গ",
+          "text": "শব্দের উপর"
+        },
+        {
+          "label": "ঘ",
+          "text": "বিটের দৈর্ঘ্যরে উপর"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) শব্দ দৈর্ঘ্যরে উপর",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 42,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "2’s complement এর নির্ণয়ের সূত্র নিম্নরুপ-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "1’s complement+1"
+        },
+        {
+          "label": "খ",
+          "text": "1’s complement-1"
+        },
+        {
+          "label": "গ",
+          "text": "2” + সংখ্যাটি"
+        },
+        {
+          "label": "ঘ",
+          "text": "2” – সংখ্যাটি"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) 1’s complement+1",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 43,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "২৫০ কে বাইনারিতে প্রকাশ করতে গেলে কত বিট প্রয়োজন?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "৪বিট"
+        },
+        {
+          "label": "খ",
+          "text": "৩বিট"
+        },
+        {
+          "label": "গ",
+          "text": "৯বিট"
+        },
+        {
+          "label": "ঘ",
+          "text": "৫বিট"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) ৯বিট",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 44,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "BCD কত বিটের কোড?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "1বিট"
+        },
+        {
+          "label": "খ",
+          "text": "4বিট"
+        },
+        {
+          "label": "গ",
+          "text": "9বিট"
+        },
+        {
+          "label": "ঘ",
+          "text": "8বিট"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) 4বিট",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 45,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "(469)10 এর BCD মান কত?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "(010001101001)BCD"
+        },
+        {
+          "label": "খ",
+          "text": "(100001001)BCD"
+        },
+        {
+          "label": "গ",
+          "text": "(1001101001)BCD"
+        },
+        {
+          "label": "ঘ",
+          "text": "(1010101010)BCD"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) (010001101001)BCD",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 46,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "EBCDIC কত বিটের কোড?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "8 বিট"
+        },
+        {
+          "label": "খ",
+          "text": "4 বিট"
+        },
+        {
+          "label": "গ",
+          "text": "2 বিট"
+        },
+        {
+          "label": "ঘ",
+          "text": "16 বিট"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) 8 বিট",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 47,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "তিন বিট বিশিষ্ট বাইনারি কোডকে কী বলে?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "অকটাল কোড"
+        },
+        {
+          "label": "খ",
+          "text": "হেক্সাডেসিমেল কোড"
+        },
+        {
+          "label": "গ",
+          "text": "বাইনারি কোড"
+        },
+        {
+          "label": "ঘ",
+          "text": "অ্যাসকি কোড"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) অকটাল কোড",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 48,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "চার বিটের বাইনারি কোডকে কী বলে?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "অকটাল কোড"
+        },
+        {
+          "label": "খ",
+          "text": "হেক্সাডেসিমেল কোড"
+        },
+        {
+          "label": "গ",
+          "text": "বাইনারি কোড"
+        },
+        {
+          "label": "ঘ",
+          "text": "অ্যাসকি কোড"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) হেক্সাডেসিমেল কোড",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 49,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বাইনারি নেগেটিভ সংখ্যা ও বাইনারি পজেটিভ সংখ্যা বুঝানোর জন্য সংখ্যার কোথায় অতিরিক্ত সাইন বিট ব্যবহার করা হয়?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "সর্ববামে"
+        },
+        {
+          "label": "খ",
+          "text": "ডানদিকে"
+        },
+        {
+          "label": "গ",
+          "text": "যেকোন পার্শে"
+        },
+        {
+          "label": "ঘ",
+          "text": "উভয় পার্শে"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) সর্ববামে",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 50,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "ঋণাত্মক সংখ্যা কয়টি উপায়ে গঠন করা যায়?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "২টি"
+        },
+        {
+          "label": "খ",
+          "text": "৩টি"
+        },
+        {
+          "label": "গ",
+          "text": "৪টি"
+        },
+        {
+          "label": "ঘ",
+          "text": "৫টি"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) ২টি",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 51,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "আসকি কোডে মোট সংকেত সংখ্যা কত?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১২৮"
+        },
+        {
+          "label": "খ",
+          "text": "২৫৬"
+        },
+        {
+          "label": "গ",
+          "text": "৬৪"
+        },
+        {
+          "label": "ঘ",
+          "text": "৫১২"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) ২৫৬",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 52,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "জর্জ বুল কত সালে বুলিয়ান অ্যালজেবরা আবিস্কার করেন?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১৮৫৪"
+        },
+        {
+          "label": "খ",
+          "text": "১৯৫৪"
+        },
+        {
+          "label": "গ",
+          "text": "১৮৩৪"
+        },
+        {
+          "label": "ঘ",
+          "text": "১৯৮৫"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) ১৮৫৪",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 53,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "কত সালে জর্জ বুল গণিত ও যুক্তির মধ্যে সুসম্পর্ক স্থাপন করেন?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১৯২২"
+        },
+        {
+          "label": "খ",
+          "text": "১৯৯৫"
+        },
+        {
+          "label": "গ",
+          "text": "১৯৮৭"
+        },
+        {
+          "label": "ঘ",
+          "text": "১৮৫৪"
+        }
+      ],
+      "correctLetter": "ঘ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ঘ) ১৮৫৪",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 54,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বুলিয়ান অ্যালজেবরায় প্রত্যেক চলকের কয়টি মান থাকে?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "০২টি"
+        },
+        {
+          "label": "খ",
+          "text": "০৪টি"
+        },
+        {
+          "label": "গ",
+          "text": "০৩টি"
+        },
+        {
+          "label": "ঘ",
+          "text": "০৭টি"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) ০২টি",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 55,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বুলিয়ান অ্যালজেবরায় প্রত্যেক চলকের মান নিচের কোনটি সঠিক-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "০ ও ১"
+        },
+        {
+          "label": "খ",
+          "text": "১ ও ১"
+        },
+        {
+          "label": "গ",
+          "text": "০ ও ০"
+        },
+        {
+          "label": "ঘ",
+          "text": "০১ ও ১০"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) ০ ও ১",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 56,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "আধুনিক কম্পিউটার ও ডিজিটাল ইলেক্ট্রনিক্সে কয় ধরণের সংখ্যা পদ্ধতি ব্যবহৃত হয়?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "২টি"
+        },
+        {
+          "label": "খ",
+          "text": "৩টি"
+        },
+        {
+          "label": "গ",
+          "text": "৪টি"
+        },
+        {
+          "label": "ঘ",
+          "text": "৫টি"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) ৪টি",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 57,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বুলিয়ান ধ্রবক কাকে বলে?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "০ -কে"
+        },
+        {
+          "label": "খ",
+          "text": "১ -কে"
+        },
+        {
+          "label": "গ",
+          "text": "০ ও ১ কে"
+        },
+        {
+          "label": "ঘ",
+          "text": "কোনটিই নয়"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": true,
+      "reviewNotes": [
+        "উৎস ফাইলে উত্তর অক্ষর ছিল 'খ', কিন্তু উত্তর টেক্সট অপশনের সাথে মিলিয়ে 'গ' করা হয়েছে।"
+      ],
+      "answerRaw": "খ) ০ ও ১ কে",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 58,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বুলিয়ান অ্যালজেবরায় কয় ধরণের মৌলিক যুক্তিমূলক অপারেশন হয়?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "২ ধরনের"
+        },
+        {
+          "label": "খ",
+          "text": "৩ ধরনের"
+        },
+        {
+          "label": "গ",
+          "text": "৪ ধরনের"
+        },
+        {
+          "label": "ঘ",
+          "text": "৫ ধরনের"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) ৩ ধরনের",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 59,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "BCD এর পূর্ণরূপ কী?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "Binary Coded Decimal"
+        },
+        {
+          "label": "খ",
+          "text": "Binary Coded Dot"
+        },
+        {
+          "label": "গ",
+          "text": "Basic Code Decimal"
+        },
+        {
+          "label": "ঘ",
+          "text": "Binary Coded Dollar"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) Binary Coded Decimal",
+      "topic": "কোড, সাইনড নাম্বার ও বুলিয়ান"
+    },
+    {
+      "id": 60,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "যে সকল টেবিল বা সারণির মাধ্যমে বিভিন্ন গেইটের ফলাফল প্রকাশ করা হয় তাকে বলে-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "সত্যক"
+        },
+        {
+          "label": "খ",
+          "text": "সত্যক সারণি"
+        },
+        {
+          "label": "গ",
+          "text": "টেবিল"
+        },
+        {
+          "label": "ঘ",
+          "text": "সারণি"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) সত্যক সারণি",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 61,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "[উৎস ফাইলে প্রশ্ন/অপশন অসম্পূর্ণ]",
+      "options": [
+        {
+          "label": "ক",
+          "text": "[উৎস ফাইলে অপশন নেই]"
+        }
+      ],
+      "correctLetter": "",
+      "needsReview": true,
+      "reviewNotes": [
+        "এই প্রশ্নের সঠিক উত্তর উৎস ফাইলে অস্পষ্ট। শিক্ষক যাচাই করুন।"
+      ],
+      "answerRaw": "[উৎস ফাইলে অস্পষ্ট/অপশনের সাথে মেলেনি] [উৎস ফাইলে উত্তর অসম্পূর্ণ]",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 62,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "২৩ টি ইনপুট দিলে ধাপ হবে-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "02"
+        },
+        {
+          "label": "খ",
+          "text": "04"
+        },
+        {
+          "label": "গ",
+          "text": "08"
+        },
+        {
+          "label": "ঘ",
+          "text": "16"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) 08",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 63,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "A=1, B=0 এবং C=1 হলে",
+      "options": [
+        {
+          "label": "ক",
+          "text": "01"
+        },
+        {
+          "label": "খ",
+          "text": "10"
+        },
+        {
+          "label": "গ",
+          "text": "00"
+        },
+        {
+          "label": "ঘ",
+          "text": "11"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) 00",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 64,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "A=0, B=1 এবং C=0 হলে",
+      "options": [
+        {
+          "label": "ক",
+          "text": "10"
+        },
+        {
+          "label": "খ",
+          "text": "11"
+        },
+        {
+          "label": "গ",
+          "text": "01"
+        },
+        {
+          "label": "ঘ",
+          "text": "00"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) 11",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 65,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "মৌলিক লজিক গেইট-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "২টি"
+        },
+        {
+          "label": "খ",
+          "text": "4টি"
+        },
+        {
+          "label": "গ",
+          "text": "3টি"
+        },
+        {
+          "label": "ঘ",
+          "text": "5টি"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) 3টি",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 66,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "নিচের কোনটি একই ধরনের গেইট?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "AND, NOR, NOT"
+        },
+        {
+          "label": "খ",
+          "text": "OR, NOT, XNOR"
+        },
+        {
+          "label": "গ",
+          "text": "XOR, AND, NOT"
+        },
+        {
+          "label": "ঘ",
+          "text": "AND, NOT, OR"
+        }
+      ],
+      "correctLetter": "ঘ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ঘ) AND, NOT, OR",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 67,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "AND গেইটে A ও B দুটি ইনপুটই ০ হলে আউটপুট কত হবে?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১"
+        },
+        {
+          "label": "খ",
+          "text": "০১"
+        },
+        {
+          "label": "গ",
+          "text": "১০"
+        },
+        {
+          "label": "ঘ",
+          "text": "০"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) ০",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 68,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "দুটি NOR গেইটে – হিসেবে কাজ করে –",
+      "options": [
+        {
+          "label": "ক",
+          "text": "OR গেইট"
+        },
+        {
+          "label": "খ",
+          "text": "AND গেইট"
+        },
+        {
+          "label": "গ",
+          "text": "NOR গেইট"
+        },
+        {
+          "label": "ঘ",
+          "text": "NAND গেইট"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) OR গেইট",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 69,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "NAND গেইটে দুইটি ইনপুটই ১ হলে আউটপুট কত হবে?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১"
+        },
+        {
+          "label": "খ",
+          "text": "০১"
+        },
+        {
+          "label": "গ",
+          "text": "১০"
+        },
+        {
+          "label": "ঘ",
+          "text": "০"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) ০",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 70,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "কোন ধরনের গেইটে দুটি ইনপুটের মান একই মানের জন্য আউটপুট ১ এবং দুটি ভিন্ন মানের জন্য আউটপুট ০ হয়?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "AND"
+        },
+        {
+          "label": "খ",
+          "text": "NOR"
+        },
+        {
+          "label": "গ",
+          "text": "XNOR"
+        },
+        {
+          "label": "ঘ",
+          "text": "XOR"
+        }
+      ],
+      "correctLetter": "ঘ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ঘ) XOR",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 71,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "XNOR গেইট তৈরির জন্য XOR গেইটের সাথে যুক্ত করতে হয়-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "NOT গেইট"
+        },
+        {
+          "label": "খ",
+          "text": "NOR গেইট"
+        },
+        {
+          "label": "গ",
+          "text": "AND গেইট"
+        },
+        {
+          "label": "ঘ",
+          "text": "OR গেইট"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) NOT গেইট",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 72,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "সাধরণত দুটি বিট একই কিনা তা তুলনা করার জন্য কাজে ব্যবহৃত হয়-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "XOR গেইট"
+        },
+        {
+          "label": "খ",
+          "text": "XNOR গেইট"
+        },
+        {
+          "label": "গ",
+          "text": "AND গেইট"
+        },
+        {
+          "label": "ঘ",
+          "text": "OR গেইট"
+        }
+      ],
+      "correctLetter": "",
+      "needsReview": true,
+      "reviewNotes": [
+        "এই প্রশ্নের সঠিক উত্তর উৎস ফাইলে অস্পষ্ট। শিক্ষক যাচাই করুন।"
+      ],
+      "answerRaw": "[উৎস ফাইলে অস্পষ্ট/অপশনের সাথে মেলেনি] ১৯০৭",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 73,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "৮টি ইনপুটের থেকে এনকোডারের আউটপুট পাওয়া যায়-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১৬টি"
+        },
+        {
+          "label": "খ",
+          "text": "০৩টি"
+        },
+        {
+          "label": "গ",
+          "text": "০২টি"
+        },
+        {
+          "label": "ঘ",
+          "text": "০৪টি"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) ০৩টি",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 74,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "যে ডিজিটাল বর্তনীয় মাধ্যমে আনকোডেড ডেটাকে কোডেড ডেটায় পরিনত করা হয়, তাকে কী বলে?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "ডিকোডার"
+        },
+        {
+          "label": "খ",
+          "text": "এনকোডার"
+        },
+        {
+          "label": "গ",
+          "text": "উভয়ই"
+        },
+        {
+          "label": "ঘ",
+          "text": "কোনটিই নয়"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) এনকোডার",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 75,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "কোন গেইটের ইনপুট দুটি অসমান হলে আউটপুট ১ হবে-",
+      "options": [
+        {
+          "label": "ক",
+          "text": "XNOR গেইট"
+        },
+        {
+          "label": "খ",
+          "text": "AND গেইট"
+        },
+        {
+          "label": "গ",
+          "text": "OR গেইট"
+        },
+        {
+          "label": "ঘ",
+          "text": "XOR গেইট"
+        }
+      ],
+      "correctLetter": "",
+      "needsReview": true,
+      "reviewNotes": [
+        "এই প্রশ্নের সঠিক উত্তর উৎস ফাইলে অস্পষ্ট। শিক্ষক যাচাই করুন।"
+      ],
+      "answerRaw": "[উৎস ফাইলে অস্পষ্ট/অপশনের সাথে মেলেনি] ১৯০৭",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 76,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "NAND গেইট – হিসেবে কাজ করে –",
+      "options": [
+        {
+          "label": "ক",
+          "text": "দুটি AND গেইট"
+        },
+        {
+          "label": "খ",
+          "text": "দুটি NOT গেইট"
+        },
+        {
+          "label": "গ",
+          "text": "দুটি OR গেইট"
+        },
+        {
+          "label": "ঘ",
+          "text": "একটি AND গেইট"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) দুটি AND গেইট",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 77,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "এককোডারের সাহায্যে যেকোন আলফানিউমেরিক বর্ণকে কোন কোডে পরিণত করা যায়?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "Binary কোড"
+        },
+        {
+          "label": "খ",
+          "text": "BCD কোড"
+        },
+        {
+          "label": "গ",
+          "text": "ASCII কোড"
+        },
+        {
+          "label": "ঘ",
+          "text": "সবগুলোই"
+        }
+      ],
+      "correctLetter": "ঘ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ঘ) সবগুলোই",
+      "topic": "লজিক গেইট ও এনকোডার"
+    },
+    {
+      "id": 78,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বাইনারি নিয়মে গুণ করা মানে –",
+      "options": [
+        {
+          "label": "ক",
+          "text": "বার বার যোগ করা"
+        },
+        {
+          "label": "খ",
+          "text": "বার বার বিয়োগ করা"
+        },
+        {
+          "label": "গ",
+          "text": "বার বার গুণ করা"
+        },
+        {
+          "label": "ঘ",
+          "text": "বার বার ভাগ করা"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) বার বার যোগ করা",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 79,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "পূরক পদ্ধতিতে যোগের মাধ্যমে করা হয় –",
+      "options": [
+        {
+          "label": "ক",
+          "text": "বিয়োগের কাজ"
+        },
+        {
+          "label": "খ",
+          "text": "যোগের কাজ"
+        },
+        {
+          "label": "গ",
+          "text": "গুণের কাজ"
+        },
+        {
+          "label": "ঘ",
+          "text": "ভাগের কাজ"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) বিয়োগের কাজ",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 80,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "যে বর্তনীতে দুটি ইনপুট যোগ করলে ১টি সাম ও ১টি ক্যারি থাকে তাকে বলে –",
+      "options": [
+        {
+          "label": "ক",
+          "text": "ফুল অ্যাডার"
+        },
+        {
+          "label": "খ",
+          "text": "হাফ অ্যাডার"
+        },
+        {
+          "label": "গ",
+          "text": "রেজিস্টার"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": true,
+      "reviewNotes": [],
+      "answerRaw": "খ) হাফ অ্যাডার",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 81,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "যে সমবায় বর্তনীয় সাহায্যে যোগের কাজ করা হয়, তাকে বলে –",
+      "options": [
+        {
+          "label": "ক",
+          "text": "ফ্যারাডে"
+        },
+        {
+          "label": "খ",
+          "text": "অ্যাডার"
+        },
+        {
+          "label": "গ",
+          "text": "অ্যাড"
+        },
+        {
+          "label": "ঘ",
+          "text": "ক্যাড"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) অ্যাডার",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 82,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "অ্যাডার কত প্রকার?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "দুই প্রকার"
+        },
+        {
+          "label": "খ",
+          "text": "তিন প্রকার"
+        },
+        {
+          "label": "গ",
+          "text": "চার প্রকার"
+        },
+        {
+          "label": "ঘ",
+          "text": "পাঁচ প্রকার"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) দুই প্রকার",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 83,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বিশেষ রেজিষ্টার কত প্রকার?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "দুই প্রকার"
+        },
+        {
+          "label": "খ",
+          "text": "তিন প্রকার"
+        },
+        {
+          "label": "গ",
+          "text": "আট প্রকার"
+        },
+        {
+          "label": "ঘ",
+          "text": "নয় প্রকার"
+        }
+      ],
+      "correctLetter": "ঘ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ঘ) নয় প্রকার",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 84,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "৫টি ফ্লিপ-ফ্লপ দ্বারা গঠিত একটি রিং কাইন্টারের স্টেট থাকে –",
+      "options": [
+        {
+          "label": "ক",
+          "text": "৫টি"
+        },
+        {
+          "label": "খ",
+          "text": "১০টি"
+        },
+        {
+          "label": "গ",
+          "text": "১৬টি"
+        },
+        {
+          "label": "ঘ",
+          "text": "৩২টি"
+        }
+      ],
+      "correctLetter": "ঘ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ঘ) ৩২টি",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 85,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "রেজিষ্টার হলো এমন একটি সমন্মিত সার্কিট যা গঠিত হয় একগুচ্ছ –",
+      "options": [
+        {
+          "label": "ক",
+          "text": "মেমোরি নিয়ে"
+        },
+        {
+          "label": "খ",
+          "text": "ফ্লিপ-ফ্লপ ও গেইট নিয়ে"
+        },
+        {
+          "label": "গ",
+          "text": "তার দিয়ে"
+        },
+        {
+          "label": "ঘ",
+          "text": "গেইট দিয়ে"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) ফ্লিপ-ফ্লপ ও গেইট নিয়ে",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 86,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "ইনপুটের উপর ভিত্তি করে কাউন্টার কত প্রকার?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "দুই প্রকার"
+        },
+        {
+          "label": "খ",
+          "text": "তিন প্রকার"
+        },
+        {
+          "label": "গ",
+          "text": "চার প্রকার"
+        },
+        {
+          "label": "ঘ",
+          "text": "পাঁচ প্রকার"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) দুই প্রকার",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 87,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "ডেটা ট্রান্সফারের ভিত্তিতে রেজিষ্টারকে কতভাগে ভাগ করা যায়?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "দুই ভাগে"
+        },
+        {
+          "label": "খ",
+          "text": "তিন ভাগে"
+        },
+        {
+          "label": "গ",
+          "text": "চার ভাগে"
+        },
+        {
+          "label": "ঘ",
+          "text": "পাঁচ ভাগে"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) তিন ভাগে",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 88,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "রেজিষ্টারের নতুন তথ্য রাখাকে কী বলে?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "Coding"
+        },
+        {
+          "label": "খ",
+          "text": "Loading"
+        },
+        {
+          "label": "গ",
+          "text": "Booting"
+        },
+        {
+          "label": "ঘ",
+          "text": "Encounting"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) Loading",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 89,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "গঠন অনুসারে রেজিষ্টার কত প্রকার?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "দুই প্রকার"
+        },
+        {
+          "label": "খ",
+          "text": "তিন প্রকার"
+        },
+        {
+          "label": "গ",
+          "text": "চার প্রকার"
+        },
+        {
+          "label": "ঘ",
+          "text": "পাঁচ প্রকার"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) দুই প্রকার",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 90,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "১টি কাউন্টারের সবচেয়ে সরল সিকুয়েন্স হলো –",
+      "options": [
+        {
+          "label": "ক",
+          "text": "বাইনরি সিকুয়েন্স"
+        },
+        {
+          "label": "খ",
+          "text": "প্যারালাল সিকুয়েন্স"
+        },
+        {
+          "label": "গ",
+          "text": "অকটাল সিকুয়েন্স"
+        },
+        {
+          "label": "ঘ",
+          "text": "ডেসিমেল সিকুয়েন্স"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) বাইনরি সিকুয়েন্",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 91,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "কাউন্টার সর্বাধিক যতগুলো গুণতে পারে, তাকে বলে –",
+      "options": [
+        {
+          "label": "ক",
+          "text": "ফ্লিপ ফ্লপ"
+        },
+        {
+          "label": "খ",
+          "text": "মডিউলাস"
+        },
+        {
+          "label": "গ",
+          "text": "ঘাত"
+        },
+        {
+          "label": "ঘ",
+          "text": "তাওয়ার"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) মডিউলাস",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 92,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "যে সমবায় বর্তনীয় সাহায্যে যোগের কাজ করা হয়, তাকে বলে –",
+      "options": [
+        {
+          "label": "ক",
+          "text": "ফ্যারাডে"
+        },
+        {
+          "label": "খ",
+          "text": "অ্যাডার"
+        },
+        {
+          "label": "গ",
+          "text": "অ্যাড"
+        },
+        {
+          "label": "ঘ",
+          "text": "ক্যাড"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) অ্যাডার",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 93,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "ইনপুট ক্লক পালসের উপর ভিত্তি করে কাউন্টার কত প্রকার?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "দুই প্রকার"
+        },
+        {
+          "label": "খ",
+          "text": "তিন প্রকার"
+        },
+        {
+          "label": "গ",
+          "text": "চার প্রকার"
+        },
+        {
+          "label": "ঘ",
+          "text": "পাঁচ প্রকার"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) দুই প্রকার",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 94,
+      "section": "সাধারণ বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "অ্যাসিনক্রোনাস কাউন্টার কত প্রকার?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "দুই প্রকার"
+        },
+        {
+          "label": "খ",
+          "text": "তিন প্রকার"
+        },
+        {
+          "label": "গ",
+          "text": "চার প্রকার"
+        },
+        {
+          "label": "ঘ",
+          "text": "পাঁচ প্রকার"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) দুই প্রকার",
+      "topic": "অ্যাডার, রেজিস্টার ও কাউন্টার"
+    },
+    {
+      "id": 95,
+      "section": "বহুপদী সমাপ্তিসূচক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "সংখ্যা পদ্ধতি লিখে প্রকাশ করার জন্য ব্যবহার হয়- (i) সাংকেতিক চিহ্ন (ii) মৌলিক চিহ্ন (iii) রোমান চিহ্ন নিচের কোনটি সঠিক?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "i ও ii"
+        },
+        {
+          "label": "খ",
+          "text": "i ও iii"
+        },
+        {
+          "label": "গ",
+          "text": "ii ও iii"
+        },
+        {
+          "label": "ঘ",
+          "text": "i, ii ও iii"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) i ও ii",
+      "topic": "বহুপদী প্রশ্ন"
+    },
+    {
+      "id": 96,
+      "section": "বহুপদী সমাপ্তিসূচক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বিভিন্ন ধরনের গণনা পদ্ধতির মধ্যে রয়েছে – (i) রোমান (ii)ব্যাবিলিয়ান (iii) গ্রিক নিচের কোনটি সঠিক?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "i ও ii"
+        },
+        {
+          "label": "খ",
+          "text": "i ও iii"
+        },
+        {
+          "label": "গ",
+          "text": "ii ও iii"
+        },
+        {
+          "label": "ঘ",
+          "text": "i, ii ও iii"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) i, ii ও iii",
+      "topic": "বহুপদী প্রশ্ন"
+    },
+    {
+      "id": 97,
+      "section": "বহুপদী সমাপ্তিসূচক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "একটি সংখ্যায় থাকতে পারে – (i) পূর্ণাংশ (ii) ভগ্নাংশ (iii) র্যাডিক্স পয়েন্ট নিচের কোনটি সঠিক?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "i ও ii"
+        },
+        {
+          "label": "খ",
+          "text": "i ও iii"
+        },
+        {
+          "label": "গ",
+          "text": "ii ও iii"
+        },
+        {
+          "label": "ঘ",
+          "text": "i, ii ও iii"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) i, ii ও iii",
+      "topic": "বহুপদী প্রশ্ন"
+    },
+    {
+      "id": 98,
+      "section": "বহুপদী সমাপ্তিসূচক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "৪৩৮ সংখ্যাটি হতে পারে – (i) অকটাল (ii) ডেসিম্যাল (iii) হেক্সাডেসিম্যাল নিচের কোনটি সঠিক?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "i ও ii"
+        },
+        {
+          "label": "খ",
+          "text": "i ও iii"
+        },
+        {
+          "label": "গ",
+          "text": "ii ও iii"
+        },
+        {
+          "label": "ঘ",
+          "text": "i, ii ও iii"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) ii ও iii",
+      "topic": "বহুপদী প্রশ্ন"
+    },
+    {
+      "id": 99,
+      "section": "বহুপদী সমাপ্তিসূচক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "একটি সংখ্যার মান বের করার জন্য ডেটার দরকার – (i) সংখ্যাটিতে ব্যবহৃত অংকগুলোর নিজস্ব মান (ii) সংখ্যা পদ্ধতির ভিত্তি (iii) সংখ্যাটিতে ব্যবহৃত অংকগুলোর স্থানীয় মান নিচের কোনটি সঠিক?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "i ও ii"
+        },
+        {
+          "label": "খ",
+          "text": "i ও iii"
+        },
+        {
+          "label": "গ",
+          "text": "ii ও iii"
+        },
+        {
+          "label": "ঘ",
+          "text": "i, ii ও iii"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) i, ii ও iii",
+      "topic": "বহুপদী প্রশ্ন"
+    },
+    {
+      "id": 100,
+      "section": "বহুপদী সমাপ্তিসূচক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বাইনারি সংখ্যা পদ্ধতি সম্পর্কে ধারণা দেন – (i) গটফ্রিড লিবনিজ (ii) জর্জ বুল (iii) মার্শাল ম্যাক নিচের কোনটি সঠিক?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "i ও ii"
+        },
+        {
+          "label": "খ",
+          "text": "i ও iii"
+        },
+        {
+          "label": "গ",
+          "text": "ii ও iii"
+        },
+        {
+          "label": "ঘ",
+          "text": "i, ii ও iii"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) i ও ii",
+      "topic": "বহুপদী প্রশ্ন"
+    },
+    {
+      "id": 101,
+      "section": "বহুপদী সমাপ্তিসূচক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "ঋনাত্মক সংখ্যার ক্ষেত্রে সংখ্যার মান বোঝানোর জন্য পদ্ধতি অবলম্বন করা হয়- (i) প্রকৃতমান গঠন (ii) ১ -এর পরিপূরক গঠন (iii) ২ -এর পরিপূক গঠন নিচের কোনটি সঠিক?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "i ও ii"
+        },
+        {
+          "label": "খ",
+          "text": "i ও iii"
+        },
+        {
+          "label": "গ",
+          "text": "ii ও iii"
+        },
+        {
+          "label": "ঘ",
+          "text": "i, ii ও iii"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) i, ii ও iii",
+      "topic": "বহুপদী প্রশ্ন"
+    },
+    {
+      "id": 102,
+      "section": "বহুপদী সমাপ্তিসূচক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "NAND গেইটে আউটপুট 1 পেতে হলে ইনপুট দিতে হবে – (i) A=0, B=1 (ii) A=1, B=0 (iii) A=1, B=1 নিচের কোনটি সঠিক?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "i ও ii"
+        },
+        {
+          "label": "খ",
+          "text": "i ও iii"
+        },
+        {
+          "label": "গ",
+          "text": "ii ও iii"
+        },
+        {
+          "label": "ঘ",
+          "text": "i, ii ও iii"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) i ও ii",
+      "topic": "বহুপদী প্রশ্ন"
+    },
+    {
+      "id": 103,
+      "section": "বহুপদী সমাপ্তিসূচক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "সমীকরণগুলো লক্ষ্য কর – ((i) A+AB=A (ii) A(A+B)=A (iii) (A+B)(A+C)A+BC নিচের কোনটি সঠিক?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "i ও ii"
+        },
+        {
+          "label": "খ",
+          "text": "i ও iii"
+        },
+        {
+          "label": "গ",
+          "text": "ii ও iii"
+        },
+        {
+          "label": "ঘ",
+          "text": "i, ii ও iii"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) i, ii ও iii",
+      "topic": "বহুপদী প্রশ্ন"
+    },
+    {
+      "id": 104,
+      "section": "বহুপদী সমাপ্তিসূচক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "৬ দশমিক সংখ্যার মান- (i) ১ম বিট চিহ্ন বিট (ii) ৭ বিট হল ডেটা বিট (iii) ৮ বিট রেজিষ্টারের ধনাত্মক মান ০০০০০১১০ নিচের কোনটি সঠিক?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "i ও ii"
+        },
+        {
+          "label": "খ",
+          "text": "i ও iii"
+        },
+        {
+          "label": "গ",
+          "text": "ii ও iii"
+        },
+        {
+          "label": "ঘ",
+          "text": "i, ii ও iii"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) i, ii ও iii",
+      "topic": "বহুপদী প্রশ্ন"
+    },
+    {
+      "id": 105,
+      "section": "বহুপদী সমাপ্তিসূচক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "NOR গেইট দিয়ে তৈরি করা যায় – (i) AND গেইট (ii) OR গেইট (iii) XOR গেইট নিচের কোনটি সঠিক?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "i ও ii"
+        },
+        {
+          "label": "খ",
+          "text": "i ও iii"
+        },
+        {
+          "label": "গ",
+          "text": "ii ও iii"
+        },
+        {
+          "label": "ঘ",
+          "text": "i, ii ও iii"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) i ও ii",
+      "topic": "বহুপদী প্রশ্ন"
+    },
+    {
+      "id": 106,
+      "section": "বহুপদী সমাপ্তিসূচক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "NOR এবং NAND গেইট দুটিকে বলা হয়- (i) মৌলিক গেইট (ii) যৌগিক গেইট (iii) সার্বজনীন গেইট নিচের কোনটি সঠিক?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "i ও ii"
+        },
+        {
+          "label": "খ",
+          "text": "i ও iii"
+        },
+        {
+          "label": "গ",
+          "text": "ii ও iii"
+        },
+        {
+          "label": "ঘ",
+          "text": "i, ii ও iii"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) ii ও iii",
+      "topic": "বহুপদী প্রশ্ন"
+    },
+    {
+      "id": 107,
+      "section": "অভিন্ন তথ্যভিত্তিক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "কম্পিউটার কোন ধরনের সংখ্যা পদ্ধতি ব্যবহার করে?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "দশমিক"
+        },
+        {
+          "label": "খ",
+          "text": "বাইনারি"
+        },
+        {
+          "label": "গ",
+          "text": "অকটাল"
+        },
+        {
+          "label": "ঘ",
+          "text": "হেক্সাডেসিমেল"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) বাইনারি",
+      "topic": "অভিন্ন তথ্যভিত্তিক প্রশ্ন"
+    },
+    {
+      "id": 108,
+      "section": "অভিন্ন তথ্যভিত্তিক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "বাইনারি সংখ্যা পদ্ধতিতে মোট মৌলিক চিহ্ন বা অংক কয়টি?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১০টি"
+        },
+        {
+          "label": "খ",
+          "text": "১৬টি"
+        },
+        {
+          "label": "গ",
+          "text": "০২টি"
+        },
+        {
+          "label": "ঘ",
+          "text": "০৮টি"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) ০২টি",
+      "topic": "অভিন্ন তথ্যভিত্তিক প্রশ্ন"
+    },
+    {
+      "id": 109,
+      "section": "অভিন্ন তথ্যভিত্তিক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "",
+      "question": "একটি বাইনারি সংখ্যাকে কোন সংখ্যায় পরিণত করা যায়?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "দশমিক ও অকটাল"
+        },
+        {
+          "label": "খ",
+          "text": "অকটাল ও হেক্সাডেসিমেল"
+        },
+        {
+          "label": "গ",
+          "text": "দশমিক ও হেক্সাডেসিমেল"
+        },
+        {
+          "label": "ঘ",
+          "text": "অকটাল, দশমিক ও হেক্সাডেসিমেল"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) অকটাল, দশমিক ও হেক্সাডেসিমেল",
+      "topic": "অভিন্ন তথ্যভিত্তিক প্রশ্ন"
+    },
+    {
+      "id": 110,
+      "section": "অভিন্ন তথ্যভিত্তিক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "নিচের সারণিটি দেখ এবং ১১০ ও ১১১ নং প্রশ্নের উত্তর দাওঃ A B X 0 0 0 0 1 0 1 0 0 1 1 1",
+      "question": "উপরোক্ত সারনীটি কোন গেইটের?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "NOT গেইট এর"
+        },
+        {
+          "label": "খ",
+          "text": "OR গেইট এর"
+        },
+        {
+          "label": "গ",
+          "text": "NAND গেইট এর"
+        },
+        {
+          "label": "ঘ",
+          "text": "AND গেইট এর"
+        }
+      ],
+      "correctLetter": "গ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "গ) AND গেইট এর",
+      "topic": "অভিন্ন তথ্যভিত্তিক প্রশ্ন"
+    },
+    {
+      "id": 111,
+      "section": "অভিন্ন তথ্যভিত্তিক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "নিচের সারণিটি দেখ এবং ১১০ ও ১১১ নং প্রশ্নের উত্তর দাওঃ A B X 0 0 0 0 1 0 1 0 0 1 1 1",
+      "question": "নিচের কোনটি মৌলিক লজিক গেইট?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "NOT গেইট"
+        },
+        {
+          "label": "খ",
+          "text": "XOR গেইট"
+        },
+        {
+          "label": "গ",
+          "text": "NAND গেইট"
+        },
+        {
+          "label": "ঘ",
+          "text": "XNOR গেইট"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) NOT গেইট",
+      "topic": "অভিন্ন তথ্যভিত্তিক প্রশ্ন"
+    },
+    {
+      "id": 112,
+      "section": "অভিন্ন তথ্যভিত্তিক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "নিচের উদ্দিপকটি পড় এবং ১১২, ১১৩ ও ১১৪ নং প্রশ্নের উত্তর দাওঃ ফেনী সিটি কলেজের তথ্য ও যোগাযোগ প্রযুক্তির শিক্ষক তার ক্লাসে সংখ্যা পদ্ধতি পাঠদান শেষে বোর্ডে DADA লিখলেন। অতঃপর শিক্ষার্থীদের কাছে জানতে চাইলেন যে তিনি কি লিখেছেন।",
+      "question": "তিনি উক্ত কোডটি কোন সংখ্যা পদ্ধতির মাধ্যমে লিখেছেন?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "বাইনারি সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "খ",
+          "text": "অকটাল সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "গ",
+          "text": "দশমিক সংখ্যা পদ্ধতি"
+        },
+        {
+          "label": "ঘ",
+          "text": "হেক্সাডেসিমেল সংখ্যা পদ্ধতি"
+        }
+      ],
+      "correctLetter": "ঘ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ঘ) হেক্সাডেসিমেল সংখ্যা পদ্ধতি",
+      "topic": "অভিন্ন তথ্যভিত্তিক প্রশ্ন"
+    },
+    {
+      "id": 113,
+      "section": "অভিন্ন তথ্যভিত্তিক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "নিচের উদ্দিপকটি পড় এবং ১১২, ১১৩ ও ১১৪ নং প্রশ্নের উত্তর দাওঃ ফেনী সিটি কলেজের তথ্য ও যোগাযোগ প্রযুক্তির শিক্ষক তার ক্লাসে সংখ্যা পদ্ধতি পাঠদান শেষে বোর্ডে DADA লিখলেন। অতঃপর শিক্ষার্থীদের কাছে জানতে চাইলেন যে তিনি কি লিখেছেন।",
+      "question": "DADA সমতুল্য দশমিক সংখ্যা কত?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১৫৫৩৩২"
+        },
+        {
+          "label": "খ",
+          "text": "৫৬০২৬"
+        },
+        {
+          "label": "গ",
+          "text": "৪৩৯৬২"
+        },
+        {
+          "label": "ঘ",
+          "text": "১২৫৬৭২"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) ৫৬০২৬",
+      "topic": "অভিন্ন তথ্যভিত্তিক প্রশ্ন"
+    },
+    {
+      "id": 114,
+      "section": "অভিন্ন তথ্যভিত্তিক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "নিচের উদ্দিপকটি পড় এবং ১১২, ১১৩ ও ১১৪ নং প্রশ্নের উত্তর দাওঃ ফেনী সিটি কলেজের তথ্য ও যোগাযোগ প্রযুক্তির শিক্ষক তার ক্লাসে সংখ্যা পদ্ধতি পাঠদান শেষে বোর্ডে DADA লিখলেন। অতঃপর শিক্ষার্থীদের কাছে জানতে চাইলেন যে তিনি কি লিখেছেন।",
+      "question": "DADA সমতুল্য অকটাল সংখ্যা কত?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "১৫৫৩৩২"
+        },
+        {
+          "label": "খ",
+          "text": "৫৬০২৬"
+        },
+        {
+          "label": "গ",
+          "text": "৪৩৯৬২"
+        },
+        {
+          "label": "ঘ",
+          "text": "১২৫৬৭২"
+        }
+      ],
+      "correctLetter": "ক",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "ক) ১৫৫৩৩২",
+      "topic": "অভিন্ন তথ্যভিত্তিক প্রশ্ন"
+    },
+    {
+      "id": 115,
+      "section": "অভিন্ন তথ্যভিত্তিক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "নিচের উদ্দিপকটি পড় এবং ১১৫ ও ১১৬ নং প্রশ্নের উত্তর দাওঃ নুরুল হুদা একজন ফেনী সিটি কলেজের একাদশ শ্রেণির ছাত্র। তার কলেজের আই.সি.টি শিক্ষক তাকে বুলিয়ান অ্যালজেবরার কিছু সমস্যা সমাধান করতে বললেন।",
+      "question": "বুলিয়ান অ্যালজেবরা আবিষ্কার করেন?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "ডি-মরগ্যান"
+        },
+        {
+          "label": "খ",
+          "text": "জর্জ বুল"
+        },
+        {
+          "label": "গ",
+          "text": "জন নেপিয়ার"
+        },
+        {
+          "label": "ঘ",
+          "text": "নিউটন"
+        }
+      ],
+      "correctLetter": "খ",
+      "needsReview": false,
+      "reviewNotes": [],
+      "answerRaw": "খ) জর্জ বুল",
+      "topic": "অভিন্ন তথ্যভিত্তিক প্রশ্ন"
+    },
+    {
+      "id": 116,
+      "section": "অভিন্ন তথ্যভিত্তিক বহুনির্বাচনী প্রশ্ন",
+      "stimulus": "নিচের উদ্দিপকটি পড় এবং ১১৫ ও ১১৬ নং প্রশ্নের উত্তর দাওঃ নুরুল হুদা একজন ফেনী সিটি কলেজের একাদশ শ্রেণির ছাত্র। তার কলেজের আই.সি.টি শিক্ষক তাকে বুলিয়ান অ্যালজেবরার কিছু সমস্যা সমাধান করতে বললেন।",
+      "question": "নিচের কোনটি বুলিয়ান অ্যালজেরার মৌলিক ক্রিয়া?",
+      "options": [
+        {
+          "label": "ক",
+          "text": "OR গেইট"
+        },
+        {
+          "label": "খ",
+          "text": "AND গেইট"
+        },
+        {
+          "label": "গ",
+          "text": "NOT গেইট"
+        },
+        {
+          "label": "ঘ",
+          "text": "NAND গেইট"
+        }
+      ],
+      "correctLetter": "ঘ",
+      "needsReview": true,
+      "reviewNotes": [
+        "উৎস ফাইলে উত্তর অক্ষর ছিল না; উত্তর টেক্সট মিলিয়ে 'ঘ' করা হয়েছে।"
+      ],
+      "answerRaw": "NAND.",
+      "topic": "অভিন্ন তথ্যভিত্তিক প্রশ্ন"
+    }
+  ]
+}

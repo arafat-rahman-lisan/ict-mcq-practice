@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCQ Practice | সংখ্যা পদ্ধতি ও ডিজিটাল সিস্টেম</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <nav class="topbar">
+        <div class="brand">
+          <span class="brand-icon">✦</span>
+          <span>ICT MCQ Practice</span>
+        </div>
+        <div class="pill" id="totalPill">Loading...</div>
+      </nav>
+      <section class="hero-content">
+        <div>
+          <p class="eyebrow">Class Practice Website</p>
+          <h1>সংখ্যা পদ্ধতি ও ডিজিটাল সিস্টেম</h1>
+          <p class="subtitle">MCQ practice, instant answer checking, progress tracking, and Gemini-powered explanation button for every question.</p>
+        </div>
+        <div class="score-card">
+          <span>Score</span>
+          <strong id="scoreText">0 / 0</strong>
+          <small id="progressText">No answers yet</small>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="controls card">
+        <div class="field search-field">
+          <label for="searchInput">Search MCQ</label>
+          <input id="searchInput" type="search" placeholder="প্রশ্ন, অপশন বা উত্তর লিখুন..." />
+        </div>
+        <div class="field">
+          <label for="topicFilter">Topic</label>
+          <select id="topicFilter">
+            <option value="all">সব টপিক</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="statusFilter">Status</label>
+          <select id="statusFilter">
+            <option value="all">সব প্রশ্ন</option>
+            <option value="unanswered">Unanswered</option>
+            <option value="correct">Correct</option>
+            <option value="wrong">Wrong</option>
+            <option value="review">Need review</option>
+            <option value="bookmarked">Bookmarked</option>
+          </select>
+        </div>
+        <button class="btn ghost" id="resetBtn" type="button">Reset Progress</button>
+      </section>
+
+      <section class="notice card" id="apiNotice">
+        <strong>Gemini Explain setup:</strong>
+        <span>config.js ফাইলে আপনার Cloudflare Worker URL বসালে Explain button কাজ করবে। API key কখনো frontend-এ রাখবেন না।</span>
+      </section>
+
+      <section id="mcqList" class="mcq-list" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <dialog id="explainDialog" class="explain-dialog">
+    <div class="dialog-head">
+      <h2>AI Explanation</h2>
+      <button class="icon-btn" id="closeDialog" aria-label="Close">×</button>
+    </div>
+    <div id="explainContent" class="explain-content"></div>
+  </dialog>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
