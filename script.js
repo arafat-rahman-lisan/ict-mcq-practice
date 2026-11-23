@@ -2,7 +2,7 @@
 const PREFIX = 'ictMcqMultiV1';
 const $ = id => document.getElementById(id);
 const escapeHtml = (v = '') => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const bn = n => Number(n).toLocaleString('bn-BD');
+const bn = n => Number(n).toLocaleString(window.UX?.lang==='en'?'en-US':'bn-BD');
 function readStore(key, fallback) { try { const v = JSON.parse(localStorage.getItem(`${PREFIX}:${key}`)); return v !== null && typeof v === typeof fallback && Array.isArray(v) === Array.isArray(fallback) ? v : fallback; } catch { return fallback; } }
 let storageWarned = false;
 function writeStore(key, value) { try { localStorage.setItem(`${PREFIX}:${key}`, JSON.stringify(value)); } catch { if (!storageWarned) { storageWarned = true; toast('ব্রাউজারে সেভ করা যাচ্ছে না। এই ট্যাবেই চর্চা চালিয়ে যেতে পারো।'); } } }
@@ -30,7 +30,7 @@ const iconPaths = {
 function icon(name){return `<svg viewBox="0 0 24 24" aria-hidden="true">${iconPaths[name]||iconPaths.book}</svg>`;}
 document.querySelectorAll('[data-icon]').forEach(e=>e.innerHTML=icon(e.dataset.icon));
 const chapterUI = {ch1:{name:'তথ্য ও যোগাযোগ প্রযুক্তি',label:'১ম অধ্যায়',short:'বিশ্ব ও বাংলাদেশ',detail:'বিশ্বগ্রাম · AI · রোবোটিক্স',icon:'globe'},ch3:{name:'সংখ্যা পদ্ধতি ও ডিজিটাল সিস্টেম',label:'৩য় অধ্যায়',short:'সংখ্যা পদ্ধতি',detail:'সংখ্যা রূপান্তর · লজিক গেট',icon:'circuit'},db:{name:'ডেটাবেজ ম্যানেজমেন্ট',label:'ডেটাবেজ',short:'ডেটাবেজ',detail:'SQL · টেবিল · রিলেশন',icon:'database'}};
-function chapterInfo(id){return chapterUI[id] || {name:state.chapters.find(c=>c.id===id)?.title||id,label:'অধ্যায়',detail:'ICT',icon:'book'};}
+function chapterInfo(id){const base=chapterUI[id] || {name:state.chapters.find(c=>c.id===id)?.title||id,label:'অধ্যায়',detail:'ICT',icon:'book'};return window.UX?.chapter(id,base)||base;}
 function usable(q){return !q.needsReview && q.options.length>=2 && q.options.some(o=>o.label===q.correctLetter);}
 function bookmarked(id){return state.bookmarks.includes(id);}
 function answerText(q){return q.options.find(o=>o.label===q.correctLetter)?.text || '';}
@@ -47,11 +47,11 @@ function empty(title,sub,button=''){return `<div class="empty-state">${icon('sea
 function renderHome(){
  const s=stats(),last=state.questions.find(q=>q.id===state.last.id&&usable(q));
  return `
-  <section class="home-intro" aria-label="আজকের অনুশীলন">
+  <section class="home-intro glass-hero" aria-label="আজকের অনুশীলন"><canvas class="hero-webgl" id="heroWebgl" aria-hidden="true"></canvas><div class="hero-glow" aria-hidden="true"></div>
    <div class="home-copy">
     <span class="section-tag"><span class="tag-dot"></span> HSC ICT · তোমার শেখার জায়গা</span>
-    <h1>পড়ো। চর্চা করো।<br><span>বুঝে এগিয়ে যাও।</span></h1>
-    <p>একটি অধ্যায় বেছে নাও, প্রশ্নের উত্তর দাও, প্রয়োজনে AI-কে জিজ্ঞেস করো।</p>
+    <h1><span class="hero-line">মুখস্থ নয়।</span><br><span class="hero-emphasis" id="heroDecode" data-decode>বুঝে শেখো।</span></h1>
+    <p>চর্চা করো, পরীক্ষা দাও, আটকে গেলে AI-কে জিজ্ঞেস করো।</p>
     <div class="hero-actions"><button class="button primary" data-action="continue">${icon('play')} ${last?'যেখান থেকে থেমেছিলে':'অনুশীলন শুরু করো'}</button><button class="button outline" data-view="exam">${icon('exam')} মডেল টেস্ট</button></div>
    </div>
    <div class="home-progress" aria-label="তোমার অগ্রগতি"><div class="progress-emblem">${icon('target')}</div><span class="home-progress-label">এ পর্যন্ত চর্চা</span><strong>${bn(s.answered)} <small>/ ${bn(s.total)}</small></strong><p>প্রশ্নের উত্তর দিয়েছ</p>${progress(s.answered/Math.max(1,s.total)*100)}<div class="progress-caption">${s.answered?bn(Math.round(s.correct/s.answered*100))+'% সঠিক':'আজই শুরু হোক'}</div></div>
@@ -72,7 +72,7 @@ function practicePool(){const search=state.search.normalize('NFC').trim().toLoca
  if(state.status==='unanswered'&&a)return false;
  if(state.status==='correct'&&a!==q.correctLetter)return false;
  if(state.status==='wrong'&&(!a||a===q.correctLetter))return false;
- if(search&&!([q.question,q.stimulus,q.topic,...q.options.map(o=>o.text)].join(' ').normalize('NFC').toLocaleLowerCase().includes(search)))return false;
+ if(search&&!([q.question,q.stimulus,q.topic,...q.options.map(o=>o.text),window.UX?.searchText(q)||''].join(' ').normalize('NFC').toLocaleLowerCase().includes(search)))return false;
  return true;
  });}
 function examPool(){if(!state.exam.questions)return [];return state.exam.questions.map(id=>state.questions.find(q=>q.id===id)).filter(Boolean).filter(q=>{const a=state.exam.answers[q.id];if(!state.exam.submitted)return true;return state.examFilter==='all'||(state.examFilter==='correct'&&a===q.correctLetter)||(state.examFilter==='wrong'&&a&&a!==q.correctLetter)||(state.examFilter==='unanswered'&&!a);});}
@@ -90,19 +90,21 @@ function renderPractice(){
 function tableHtml(t){if(!t)return '';return `<table><thead><tr>${t.headers.map(v=>`<th scope="col">${escapeHtml(v)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r=>`<tr>${r.map(v=>`<td>${escapeHtml(v)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;}
 function renderQuestion(q){
  const exam=state.view==='examRun',submitted=exam&&state.exam.submitted;
+ const display=window.UX?.englishView(q)||q;
  const answer=exam?state.exam.answers[q.id]:state.answers[q.id];
  const revealed=!exam&&state.revealed.includes(q.id);
  const locked=exam?submitted:!!answer||revealed;
  const showCorrect=usable(q)&&(submitted||(!exam&&locked));
  const draft=exam?answer:answer||state.drafts[q.id];const ready=usable(q);
  return `<article class="question-card ${exam?'exam-question':''}" data-id="${escapeHtml(q.id)}">
-  <div class="question-top"><div class="question-kicker"><span class="question-chapter chapter-mark-${escapeHtml(q.chapterId)}">${escapeHtml(chapterInfo(q.chapterId).label)}</span><span class="topic-label">${escapeHtml(q.topic||chapterInfo(q.chapterId).short)}</span></div><div class="question-head-tools">${ready&&(!exam||submitted)?`<button class="quick-ai" data-action="${locked?'explain':'ai-hint'}" aria-label="${locked?'AI দিয়ে পূর্ণ ব্যাখ্যা দেখো':'AI থেকে উত্তর ছাড়া ইঙ্গিত নাও'}">${icon('spark')} ${locked?'AI ব্যাখ্যা':'AI ইঙ্গিত'}</button>`:''}<button class="icon-button bookmark ${bookmarked(q.id)?'active':''}" data-action="bookmark" aria-label="${bookmarked(q.id)?'সংরক্ষণ সরাও':'প্রশ্ন সংরক্ষণ করো'}" title="${bookmarked(q.id)?'সংরক্ষিত':'সংরক্ষণ'}" aria-pressed="${bookmarked(q.id)}">${icon('bookmark')}</button></div></div>
-  ${q.stimulus||q.stimulusTable?`<details class="stimulus" open><summary>উদ্দীপক</summary>${escapeHtml(q.stimulus)}${tableHtml(q.stimulusTable)}</details>`:''}
-  <h2 class="question-title" id="questionTitle" tabindex="-1">${escapeHtml(q.question)}</h2>
-  <div class="options" role="radiogroup" aria-labelledby="questionTitle">${q.options.map(o=>{const correct=showCorrect&&o.label===q.correctLetter,wrong=showCorrect&&answer===o.label&&o.label!==q.correctLetter;return `<label class="option ${correct?'correct':''} ${wrong?'wrong':''} ${locked||!ready?'locked':''}"><input type="radio" name="answer" value="${escapeHtml(o.label)}" ${draft===o.label?'checked':''} ${locked||!ready?'disabled':''}><span class="letter">${escapeHtml(o.label)}</span><span class="option-text">${escapeHtml(o.text)}</span>${correct||wrong?`<span class="option-status" aria-label="${correct?'সঠিক উত্তর':'ভুল উত্তর'}">${correct?'✓':'✕'}</span>`:''}</label>`;}).join('')}</div>
+  <div class="question-top"><div class="question-kicker"><span class="question-chapter chapter-mark-${escapeHtml(q.chapterId)}">${escapeHtml(chapterInfo(q.chapterId).label)}</span><span class="topic-label">${escapeHtml(window.UX?.topic(q.topic)||q.topic||chapterInfo(q.chapterId).short)}</span></div><div class="question-head-tools">${ready&&(!exam||submitted)?`<button class="quick-ai" data-action="${locked?'explain':'ai-hint'}" aria-label="${locked?'AI দিয়ে পূর্ণ ব্যাখ্যা দেখো':'AI থেকে উত্তর ছাড়া ইঙ্গিত নাও'}">${icon('spark')} ${locked?'AI ব্যাখ্যা':'AI ইঙ্গিত'}</button>`:''}<button class="icon-button bookmark ${bookmarked(q.id)?'active':''}" data-action="bookmark" aria-label="${bookmarked(q.id)?'সংরক্ষণ সরাও':'প্রশ্ন সংরক্ষণ করো'}" title="${bookmarked(q.id)?'সংরক্ষিত':'সংরক্ষণ'}" aria-pressed="${bookmarked(q.id)}">${icon('bookmark')}</button></div></div>
+  ${display.stimulus||display.stimulusTable?`<details class="stimulus" open><summary>উদ্দীপক</summary><span class="source-text">${escapeHtml(display.stimulus)}</span>${tableHtml(display.stimulusTable)}</details>`:''}
+  <h2 class="question-title" id="questionTitle" tabindex="-1">${escapeHtml(display.question)}</h2>
+  ${display._translating?`<div class="translation-status" role="status">${icon('spark')} Translating this question into English…</div>`:display._translationFailed?`<div class="translation-status warning" role="status">English translation unavailable. Original Bengali shown. <button type="button" data-action="retry-translate">Retry translation</button></div>`:''}
+  <div class="options" role="radiogroup" aria-labelledby="questionTitle">${display.options.map(o=>{const correct=showCorrect&&o.label===q.correctLetter,wrong=showCorrect&&answer===o.label&&o.label!==q.correctLetter;return `<label class="option ${correct?'correct':''} ${wrong?'wrong':''} ${locked||!ready?'locked':''}"><input type="radio" name="answer" value="${escapeHtml(o.label)}" ${draft===o.label?'checked':''} ${locked||!ready||display._translating?'disabled':''}><span class="letter">${escapeHtml(window.UX?.optionLetter(o.label)||o.label)}</span><span class="option-text">${escapeHtml(o.text)}</span>${correct||wrong?`<span class="option-status" aria-label="${correct?'সঠিক উত্তর':'ভুল উত্তর'}">${correct?'✓':'✕'}</span>`:''}</label>`;}).join('')}</div>
   ${!ready?'<div class="quality-note">এই প্রশ্নের উৎস যাচাই প্রয়োজন। যাচাইয়ের আগে উত্তর ও স্কোর দেখানো হচ্ছে না।</div>':''}
-  ${showCorrect?`<div class="feedback ${answer?answer===q.correctLetter?'good':'bad':'neutral'}" role="status"><span class="feedback-icon">${answer===q.correctLetter?'✓':'↗'}</span><div><strong>${answer?answer===q.correctLetter?'দারুণ! সঠিক উত্তর।':'উত্তরটা মিলিয়ে দেখো।':'সঠিক উত্তর'}</strong><p>${escapeHtml(q.correctLetter)}) ${escapeHtml(answerText(q))}</p></div></div>`:''}
-  ${ready&&!exam?`<div class="learning-actions"><div class="answer-actions">${!locked?`<button class="button primary" data-action="check" ${!draft?'disabled':''}>উত্তর যাচাই করো ${icon('check')}</button><button class="button subtle" data-action="reveal">উত্তর দেখো</button>`:`<button class="button subtle" data-action="retry">${icon('reset')} আবার চেষ্টা</button>`}</div></div>`:''}
+  ${showCorrect?`<div class="feedback ${answer?answer===q.correctLetter?'good':'bad':'neutral'}" role="status"><span class="feedback-icon">${answer===q.correctLetter?'✓':'↗'}</span><div><strong>${answer?answer===q.correctLetter?'দারুণ! সঠিক উত্তর।':'উত্তরটা মিলিয়ে দেখো।':'সঠিক উত্তর'}</strong><p>${escapeHtml(window.UX?.optionLetter(q.correctLetter)||q.correctLetter)}) ${escapeHtml(display.options.find(o=>o.label===q.correctLetter)?.text||answerText(q))}</p></div></div>`:''}
+  ${ready&&!exam?`<div class="learning-actions"><div class="answer-actions">${!locked?`<button class="button primary" data-action="check" ${!draft?'disabled':''}>উত্তর যাচাই করো ${icon('check')}</button><button class="button subtle" data-action="reveal" ${display._translating?'disabled':''}>উত্তর দেখো</button>`:`<button class="button subtle" data-action="retry">${icon('reset')} আবার চেষ্টা</button>`}</div></div>`:''}
   ${exam?(submitted?'':`<div class="exam-running-note">${icon('shield')} টেস্ট চলাকালীন উত্তর ও AI ব্যাখ্যা লুকানো থাকবে। জমা দিলে দেখতে পারবে।</div>`):''}
  </article>`;
 }
@@ -118,6 +120,7 @@ function drawQuestion(focus=false){
  $('questionArea').innerHTML=`<div class="question-session"><div class="session-top"><div><span class="session-eyebrow">${state.view==='examRun'?'মডেল টেস্ট':'প্রশ্নে প্রশ্নে শিখি'}</span><strong>প্রশ্ন ${bn(state.index+1)} <span>/ ${bn(pool.length)}</span></strong></div><span class="session-percent">${bn(pct)}%</span></div><div class="session-track" role="progressbar" aria-label="প্রশ্নের অবস্থান" aria-valuenow="${state.index+1}" aria-valuemin="1" aria-valuemax="${pool.length}"><span style="width:${pct}%"></span></div>${renderQuestion(q)}<nav class="question-footer" aria-label="প্রশ্ন পরিবর্তন"><button class="button subtle" data-action="previous" ${state.index===0?'disabled':''}>← আগের</button><span class="position">${bn(state.index+1)} / ${bn(pool.length)}</span><button class="button next-button" data-action="next" ${state.index===pool.length-1?'disabled':''}>পরের প্রশ্ন →</button></nav>${navigator(pool)}</div>`;
  const nav=$('questionArea').querySelector('.navigator');nav.addEventListener('toggle',e=>state.navOpen=e.target.open);
  if(state.view!=='examRun'&&usable(q)){state.last={id:q.id};writeStore('lastV2',state.last);}else if(state.view==='examRun'){state.exam.cursor=q.id;saveExam();}
+ if(window.UX?.lang==='en')window.UX.ensureEnglish(q,()=>{if(state.loaded&&state.view&&currentPool()[state.index]?.id===q.id)drawQuestion();});
  if(focus)$('questionTitle').focus({preventScroll:true});
 }
 function renderSetup(){
@@ -128,7 +131,7 @@ function renderSetup(){
 }
 function renderResult(){const qs=state.exam.questions.map(id=>state.questions.find(q=>q.id===id));const correct=qs.filter(q=>state.exam.answers[q.id]===q.correctLetter).length,answered=Object.keys(state.exam.answers).length;const percent=Math.round(correct/qs.length*100);return `<section class="result-card"><div class="score-ring" style="--score:${percent}"><div class="score-ring-inner">${bn(percent)}%<small>তোমার স্কোর</small></div></div><div class="result-copy"><h2>টেস্ট শেষ। এবার দেখে শেখো।</h2><div class="result-stats"><div><strong>${bn(correct)}</strong><span>সঠিক</span></div><div><strong>${bn(answered-correct)}</strong><span>ভুল</span></div><div><strong>${bn(qs.length-answered)}</strong><span>উত্তর বাকি</span></div></div></div><div class="result-actions"><button class="button soft" data-view="exam">নতুন টেস্ট</button></div></section><div class="exam-review-filters">${Object.entries({all:'সব উত্তর',wrong:'ভুলগুলো',unanswered:'উত্তর বাকি',correct:'সঠিকগুলো'}).map(([v,t])=>`<button data-exam-filter="${v}" class="${state.examFilter===v?'active':''}">${t}</button>`).join('')}</div>`;}
 function renderExam(){return header(state.exam.submitted?'টেস্টের ফলাফল':'মডেল টেস্ট',`${bn(state.exam.questions.length)}টি প্রশ্ন · ${state.exam.submitted?'উত্তরগুলো মিলিয়ে দেখো':'চাইলে জমা দেওয়ার আগে উত্তর বদলাতে পারো'}`,`<div class="exam-status"><span class="timer">${icon('clock')}<span id="elapsed"></span></span><button class="button ${state.exam.submitted?'secondary':'primary'}" ${state.exam.submitted?'data-view="exam"':'data-action="submit-exam"'}>${state.exam.submitted?'নতুন টেস্ট':'টেস্ট জমা দাও'}</button></div>`)+(state.exam.submitted?renderResult():'')+'<div id="questionArea"></div>';}
-function render(){if(!state.loaded)return;$('viewLabel').textContent=({home:'হোম',practice:'অনুশীলন',saved:'সংরক্ষিত',exam:'মডেল টেস্ট',examRun:'মডেল টেস্ট'})[state.view];$('main').dataset.view=state.view;document.querySelectorAll('.main-nav [data-view]').forEach(el=>{const active=el.dataset.view===(state.view==='examRun'?'exam':state.view);el.classList.toggle('active',active);if(active)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current');});$('savedBadge').textContent=state.bookmarks.length;$('main').innerHTML=state.view==='home'?renderHome():state.view==='exam'?renderSetup():state.view==='examRun'?renderExam():renderPractice();if($('questionArea'))drawQuestion();tick();}
+function render(){if(!state.loaded)return;$('viewLabel').textContent=({home:'হোম',practice:'অনুশীলন',saved:'সংরক্ষিত',exam:'মডেল টেস্ট',examRun:'মডেল টেস্ট'})[state.view];$('main').dataset.view=state.view;document.querySelectorAll('.main-nav [data-view]').forEach(el=>{const active=el.dataset.view===(state.view==='examRun'?'exam':state.view);el.classList.toggle('active',active);if(active)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current');});$('savedBadge').textContent=state.bookmarks.length;$('main').innerHTML=state.view==='home'?renderHome():state.view==='exam'?renderSetup():state.view==='examRun'?renderExam():renderPractice();if($('questionArea'))drawQuestion();tick();window.UX?.refresh();window.dispatchEvent(new Event('ict:render'));}
 function navigate(view,reset=true){if(!state.loaded)return;state.feedbackId=null;state.view=view;if(reset){state.index=0;state.chapter='all';state.topic='all';state.status='all';state.search='';}history.replaceState(null,'',`#${view==='examRun'?'exam':view}`);render();window.scrollTo({top:0,behavior:'instant'});$('main').focus({preventScroll:true});}
 function shuffled(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function sampleExam(size){const groups=state.chapters.map(ch=>shuffled(state.questions.filter(q=>q.chapterId===ch.id&&usable(q))));const picked=[];while(picked.length<size&&groups.some(g=>g.length)){for(const g of shuffled(groups)){if(g.length&&picked.length<size)picked.push(g.pop());}}return shuffled(picked).map(q=>q.id);}
@@ -150,6 +153,7 @@ document.addEventListener('click',async e=>{const el=e.target.closest('button,a'
  if(action==='settings'){$('settingsDialog').showModal();return;}
  const q=currentPool()[state.index];if(!q)return;
  if(action==='next'||action==='previous'){const next=currentPool()[state.index+(action==='next'?1:-1)]?.id;state.feedbackId=null;state.index=Math.max(0,currentPool().findIndex(item=>item.id===next));drawQuestion(true);$('questionArea').scrollIntoView({block:'start',behavior:'smooth'});return;}
+ if(action==='retry-translate'){window.UX?.retryEnglish(q,()=>drawQuestion());drawQuestion();return;}
  if(action==='bookmark'){state.bookmarks=bookmarked(q.id)?state.bookmarks.filter(id=>id!==q.id):[...state.bookmarks,q.id];savePractice();$('savedBadge').textContent=state.bookmarks.length;toast(bookmarked(q.id)?'প্রশ্ন সংরক্ষণ করা হয়েছে':'সংরক্ষিত তালিকা থেকে সরানো হয়েছে');drawQuestion();return;}
  if(!usable(q))return;
  if(action==='check'&&state.drafts[q.id]){state.feedbackId=q.id;state.answers[q.id]=state.drafts[q.id];delete state.drafts[q.id];savePractice();drawQuestion();toast(state.answers[q.id]===q.correctLetter?'সঠিক উত্তর!':'উত্তরটি মিলিয়ে দেখো।');}
@@ -172,6 +176,10 @@ async function callExplainApi(prompt,questionId){
 }
 function promptFor(q,mode='full'){
  const shared=`অধ্যায়: ${q.chapterTitle}\nউদ্দীপক: ${q.stimulus||'নেই'}\nপ্রশ্ন: ${q.question}\n${q.options.map(o=>`${o.label}) ${o.text}`).join('\n')}`;
+ if(window.UX?.lang==='en'){
+  if(mode==='hint')return `You are a helpful ICT teacher. The student has not answered yet. Explain in ENGLISH only, in 2–4 short lines, give one useful clue. NEVER reveal the right option, its letter, or final answer.\n${shared}`;
+  return `You are a patient ICT teacher. Explain in plain ENGLISH only in 5–8 concise lines. State the right answer, explain the reasoning and briefly clarify wrong options. If the source answer appears unreliable, mention uncertainty.\n${shared}\nSource answer: ${q.correctLetter}) ${answerText(q)}`;
+ }
  if(mode==='hint')return `তুমি একজন সহায়ক ICT শিক্ষক। শিক্ষার্থী এখনও প্রশ্নের উত্তর দেয়নি। বাংলা ভাষায় মাত্র ২–৪ লাইনে উত্তর বের করার জন্য প্রয়োজনীয় ধারণা এবং একটি ছোট ইঙ্গিত দাও। সঠিক অপশন, সঠিক অক্ষর বা চূড়ান্ত উত্তর কখনো বলবে না। প্রশ্নের অপশনগুলো থেকে কোনটি সঠিক তাও স্পষ্ট করবে না।\n${shared}`;
  return `তুমি একজন ধৈর্যশীল ICT শিক্ষক। ৫–৮ লাইনে সহজ বাংলায় প্রশ্নটি ব্যাখ্যা করো। সঠিক উত্তর, যুক্তি ও অন্য অপশনগুলো ভুল হওয়ার কারণ সংক্ষেপে বলো। উৎসের উত্তর ভুল বা অস্পষ্ট মনে হলে তা স্পষ্ট করো।\n${shared}\nউৎসের উত্তর: ${q.correctLetter}) ${answerText(q)}`;
 }
@@ -180,20 +188,20 @@ function renderAiText(text){
  return safe.split(/\n\s*\n/).map(block=>{const lines=block.trim().split('\n');if(!lines[0])return '';if(lines.every(l=>/^\s*[-*•]\s+/.test(l)))return `<ul>${lines.map(l=>`<li>${l.replace(/^\s*[-*•]\s+/,'')}</li>`).join('')}</ul>`;return `<p>${lines.join('<br>')}</p>`;}).join('');
 }
 function showExplanation(text){
- $('explainContent').innerHTML=`<div class="answer-block">${renderAiText(text)}</div><p class="ai-note">${icon('info')} AI-এর উত্তরে ভুল থাকতে পারে। পাঠ্যবইয়ের সাথে মিলিয়ে নাও।</p>`;
+ $('explainContent').innerHTML=`<div class="answer-block">${renderAiText(text)}</div><p class="ai-note">${icon('info')} ${window.UX?.lang==='en'?'AI can make mistakes. Verify answers against your textbook.':'AI-এর উত্তরে ভুল থাকতে পারে। পাঠ্যবইয়ের সাথে মিলিয়ে নাও।'}</p>`;
  $('followupBox').hidden=false;
 }
 async function explain(q,mode='full'){
  if(state.view==='examRun'&&!state.exam.submitted)return;
  activeQuestion=q;activeAiMode=mode;const seq=++requestSequence;
- $('dialogTitle').textContent=mode==='hint'?'AI থেকে ইঙ্গিত':'AI দিয়ে বুঝে নাও';
- $('dialogMode').textContent=mode==='hint'?'উত্তর না বলে ধারণা দেবে':'প্রশ্নের সহজ বাংলা ব্যাখ্যা';
+ $('dialogTitle').textContent=window.UX?.lang==='en'?(mode==='hint'?'AI hint':'Learn with AI'):(mode==='hint'?'AI থেকে ইঙ্গিত':'AI দিয়ে বুঝে নাও');
+ $('dialogMode').textContent=window.UX?.lang==='en'?(mode==='hint'?'A clue without the answer':'Easy explanation in English'):(mode==='hint'?'উত্তর না বলে ধারণা দেবে':'প্রশ্নের সহজ বাংলা ব্যাখ্যা');
  $('followupBox').hidden=true;$('followupInput').value='';$('followupHistory').innerHTML='';$('askFollowupBtn').disabled=false;$('askFollowupBtn').textContent='জিজ্ঞেস করো';
  $('explainContent').innerHTML='<div class="loading-state"><span class="spinner"></span><p>AI সাহায্য তৈরি করছে…</p></div>';
  if(!$('explainDialog').open)$('explainDialog').showModal();
- const cache=mode==='hint'?(state.hints||(state.hints=readStore('hintsV3',{}))):state.explanations;
+ const english=window.UX?.lang==='en';const cache=mode==='hint'?(english?(state.hintsEn||(state.hintsEn=readStore('hintsEnV4',{}))):(state.hints||(state.hints=readStore('hintsV3',{})))):(english?(state.explanationsEn||(state.explanationsEn=readStore('explanationsEnV4',{}))):state.explanations);
  if(cache[q.id]){showExplanation(cache[q.id]);return;}
- try{const text=await callExplainApi(promptFor(q,mode),q.id);if(seq!==requestSequence||!$('explainDialog').open)return;cache[q.id]=text;writeStore(mode==='hint'?'hintsV3':'explanationsV2',cache);showExplanation(text);}catch(err){if(seq!==requestSequence||!$('explainDialog').open)return;$('explainContent').innerHTML=`<div class="ai-error"><p>${escapeHtml(err.message)}</p><button id="retryExplain" class="button outline">আবার চেষ্টা</button></div>`;$('retryExplain').onclick=()=>explain(q,mode);}
+ try{const text=await callExplainApi(promptFor(q,mode),q.id);if(seq!==requestSequence||!$('explainDialog').open)return;cache[q.id]=text;writeStore(mode==='hint'?(english?'hintsEnV4':'hintsV3'):(english?'explanationsEnV4':'explanationsV2'),cache);showExplanation(text);}catch(err){if(seq!==requestSequence||!$('explainDialog').open)return;$('explainContent').innerHTML=`<div class="ai-error"><p>${escapeHtml(err.message)}</p><button id="retryExplain" class="button outline">আবার চেষ্টা</button></div>`;$('retryExplain').onclick=()=>explain(q,mode);}
 }
 $('followupBox').onsubmit=async e=>{
  e.preventDefault();const text=$('followupInput').value.trim();const q=activeQuestion;
@@ -202,8 +210,8 @@ $('followupBox').onsubmit=async e=>{
  const row=document.createElement('div');row.className='followup-item student';row.textContent=text;$('followupHistory').append(row);
  const reply=document.createElement('div');reply.className='followup-item';reply.textContent='AI লিখছে…';$('followupHistory').append(reply);
  try{
-  const last=(mode==='hint'?state.hints?.[q.id]:state.explanations[q.id])||'';
-  const instruction=mode==='hint'?'সরাসরি সঠিক উত্তর, অপশন বা অক্ষর বলবে না; শুধু ইঙ্গিত দাও।':'ছোট করে সহজ বাংলায় বোঝাও।';
+  const english=window.UX?.lang==='en';const last=(mode==='hint'?(english?state.hintsEn?.[q.id]:state.hints?.[q.id]):(english?state.explanationsEn?.[q.id]:state.explanations[q.id]))||'';
+  const instruction=english?(mode==='hint'?'In ENGLISH, give only a clue. Never reveal the correct answer, letter or option.':'Explain briefly and clearly in ENGLISH.'):(mode==='hint'?'সরাসরি সঠিক উত্তর, অপশন বা অক্ষর বলবে না; শুধু ইঙ্গিত দাও।':'ছোট করে সহজ বাংলায় বোঝাও।');
   const answer=await callExplainApi(`${promptFor(q,mode)}\nআগের AI সহায়তা: ${last}\nশিক্ষার্থীর প্রশ্ন: ${text}\n${instruction}`,q.id);
   if(seq===requestSequence){reply.textContent=answer;$('followupInput').value='';}
  }catch(err){if(seq===requestSequence)reply.textContent=err.message;}finally{if(seq===requestSequence){btn.disabled=false;btn.textContent='জিজ্ঞেস করো';}}

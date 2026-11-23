@@ -1,39 +1,39 @@
 # ICT Practice · Learn with AI
 
-**A focused Bangla ICT learning platform:** one MCQ at a time, instant feedback, AI hints and simple explanations.
+**Understand, don't memorize.** A focused HSC ICT learning site with bilingual controls, question-by-question practice, AI hints and mock exams.
 
-[**🌐 Open website**](https://arafat-rahman-lisan.github.io/ict-mcq-practice/) · Static GitHub Pages frontend + Cloudflare Worker AI endpoint
+[**Open live website**](https://arafat-rahman-lisan.github.io/ict-mcq-practice/) · GitHub Pages + Cloudflare Worker
 
-![Redesigned ICT Practice homepage](assets/screenshots/08-ui-home.png)
+![Light theme dashboard](assets/screenshots/11-ui-v4-light.png)
 
-## ✨ Learn → Try → Understand
+## What you can do
 
-| 🗂️ Practice | ✨ AI help | 🎯 Model test |
+| 📚 Learn | ✨ AI guidance | 🎯 Test yourself |
 |:--|:--|:--|
-| Color-coded chapter cards and one question per screen | **Hint before answering**, explanation after answering and follow-up questions | 20 / 50 / 100 mixed MCQs; answers hidden until submission |
+| One MCQ at a time, chapter colors, progress and bookmarks | Hint **before** answering; full explanation and follow-ups **after** | 20 / 50 / 100 random MCQs; answers hidden until submission |
 
-![Focused MCQ practice](assets/screenshots/09-ui-practice.png)
+| 🌐 Language | 🌗 Appearance | 🫧 Motion |
+|:--|:--|:--|
+| Bangla / English switch | Saved light / dark theme | Lightweight Three.js hero, decoder text and reduced-motion fallback |
 
-## 🔌 AI integration
+![Dark theme with English interface](assets/screenshots/12-ui-v4-dark-en.png)
+
+## AI integration
 
 ```mermaid
 flowchart LR
-  A[Student picks a question] --> B{Learning mode}
-  B -->|Before answering| C[AI hint: no answer key]
-  B -->|After answering| D[Full explanation]
-  C --> E[Cloudflare Worker /explain]
+  A[Choose MCQ] --> B{Student action}
+  B -->|Before answer| C[AI hint, no key]
+  B -->|After answer| D[Full explanation]
+  C --> E[Cloudflare Worker API]
   D --> E
-  E --> F[Gemini API]
-  F -->|If unavailable| G[Workers AI fallback]
-  G -->|If unavailable| H[Static fallback]
-  F --> I[Bangla support + follow-up]
-  G --> I
-  H --> I
+  E --> F[Gemini Flash-Lite]
+  F -->|Error| G[Workers AI]
+  G -->|Error| H[Fallback guidance]
 ```
 
-**Frontend request:** only the selected MCQ context is sent, never the entire question bank.
-
 ```js
+// Only the selected MCQ context; never the whole question bank.
 const response = await fetch(window.EXPLAIN_API_URL, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
@@ -42,21 +42,24 @@ const response = await fetch(window.EXPLAIN_API_URL, {
 const { explanation } = await response.json();
 ```
 
-`config.js` stores the **public Worker URL**, not the Gemini API key. Keep API keys in **Cloudflare Worker Secrets**. AI responses are advisory and may contain mistakes. The hint prompt requests that the model not reveal the correct choice; it cannot guarantee that the model will comply.
+**English questions:** The original bank is Bengali. When EN is selected, a question is translated on demand using the same Worker endpoint, then cached in that browser. **This requires internet/AI availability on first view and uses AI tokens.** If it fails, the original Bengali question is shown with a retry control. English AI explanations use a separate cache. The translation request does **not** contain the answer key; original answer keys and scoring remain unchanged.
 
-## 📱 Mobile friendly
+**Security:** `config.js` contains only the public Worker URL. Gemini API credentials remain in Cloudflare Secrets. AI hints request no answer, but generated content is not guaranteed to be correct. Exams hide explanations until submission.
 
-![Compact mobile practice view](assets/screenshots/10-ui-mobile.png)
+![Practice interface](assets/screenshots/13-ui-v4-practice.png)
 
-- One question at a time; optional question index and filters.
-- Clearly differentiated blue, purple and green chapters.
-- Visible **AI ইঙ্গিত** action before answering; **AI ব্যাখ্যা** after.
-- Local bookmarks, progress, exam resume and clear answer states.
+## Run and deploy
 
-## 🛠️ Run / update
+**Locally:** run `START.bat` or `python serve.py` (Python 3). Opening the HTML file directly does not load the JSON question bank reliably.
 
-**Local:** double-click `START.bat` (Python 3), or run `python serve.py`. Do not open `index.html` directly; the JSON needs a local server.
+**To update existing GitHub:** copy the **contents** of the project into your Git-connected repository root, keeping `.git/` intact. Then:
 
-**GitHub Pages:** upload/update the files **inside this project folder** at your existing repository root (`index.html`, `script.js`, `styles.css`, `config.js`, `data/`, `assets/`). The Cloudflare Worker is deployed separately.
+```bash
+git add -A
+git commit -m "Add bilingual themes and Three.js learning design"
+git push origin main
+```
 
-**Data integrity:** the uploaded 277 question records and answer keys are unchanged by this redesign. As before, 118 source-review questions are not scored and are excluded from exams. See `VERIFICATION.md` and `data/text-corrections-audit.json`.
+For the full Windows path, see [`DEPLOY.md`](DEPLOY.md). Three.js is imported from a version-pinned CDN as an optional decorative enhancement; if unavailable, the core site still works without it. See [Three.js official documentation](https://threejs.org/manual/pages/fundamentals.html).
+
+**Data integrity:** 277 source records, correct-answer letters and scoring logic are preserved. Questions marked for source review remain excluded from scored tests. See [`VERIFICATION.md`](VERIFICATION.md).

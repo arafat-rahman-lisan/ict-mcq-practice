@@ -1,20 +1,23 @@
-# Update your existing GitHub repository
+# Update your existing GitHub Pages website
 
-Your Git-connected working copy was:
+Your Git-connected working folder:
 
 `C:\Users\lenovo\OneDrive\Desktop\right\projects\ict-mcq-practice-github`
 
-1. Extract this ZIP.
-2. Copy the **contents** of `ict-mcq-practice-main/` into that `ict-mcq-practice-github` folder; replace existing files when prompted. **Do not delete the hidden `.git` directory.**
-3. Open Git Bash in the `ict-mcq-practice-github` directory and run:
+1. Extract the new ZIP and open its `ict-mcq-practice-main/` folder.
+2. Copy **everything inside** into the Git-connected folder above, replacing matching files. Keep its hidden `.git` directory.
+3. Open Git Bash in the Git-connected folder and run:
 
 ```bash
+pwd
 git status
 git add -A
-git commit -m "Redesign ICT Practice UI and improve AI learning flow"
+git commit -m "Add bilingual light dark Three.js ICT design"
 git push origin main
 ```
 
-4. Visit https://arafat-rahman-lisan.github.io/ict-mcq-practice/ and refresh.
+4. Verify the deployment at https://arafat-rahman-lisan.github.io/ict-mcq-practice/ . Hard refresh with Ctrl + Shift + R if needed.
 
-The deployed Cloudflare Worker is **not** updated by this frontend push. `config.js` should only contain the public API endpoint, never a secret key.
+**Do not upload secrets.** `config.js` needs only the public Cloudflare Worker endpoint. Your Worker code and its secret Gemini key are deployed separately.
+
+**Included updated files:** `index.html`, `script.js`, `styles.css`, **new** `experience.js`, **new** `ambient3d.js`, **new** `theme-v4.css`, README and screenshots. Keep all of them together at the repository root alongside `data/` and `assets/`.

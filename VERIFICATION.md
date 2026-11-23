@@ -19,3 +19,12 @@
 
 ## Existing dataset limitations
 The question texts were not re-authored or fact-checked in this UI revision. Original review flags remain: 118 of 277 need source checks and are not scored/tested; 159 are usable. This design does not claim textbook verification of the remaining keys.
+
+## v4 bilingual and theme enhancement
+
+- Added persistent EN / BN interface language switch and saved dark/light appearance.
+- English question content translates on demand using the existing Worker; original answer letters remain unchanged. Translation responses are cached in the browser and never supplied with the answer key. Unavailable translations fall back explicitly to the source Bengali text.
+- Gemini guidance supports English prompts in EN mode; hint and explanation caches are separated by language.
+- Added a version-pinned Three.js decorative particle scene in the hero, capped at ~30 FPS, with mobile and reduced-motion safeguards.
+- New styling supports glass/translucency and contrast-aware dark mode without modifying MCQ data.
+- Browser smoke checks: desktop (1440px), mobile (390px / 360px), language toggle, theme toggle, translation success with mock endpoint, return to Bangla, pre-answer hint, English exam mode and no AI answer before submission. API runtime and actual Third-party model output are not guaranteed by local mock tests.
