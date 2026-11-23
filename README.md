@@ -1,42 +1,62 @@
-# ICT Practice — refined UI / UX
+# ICT Practice · Learn with AI
 
-A lightweight Bengali ICT practice site. Static HTML, CSS and JavaScript; no build tools or database required.
+**A focused Bangla ICT learning platform:** one MCQ at a time, instant feedback, AI hints and simple explanations.
 
-## Run on Windows
+[**🌐 Open website**](https://arafat-rahman-lisan.github.io/ict-mcq-practice/) · Static GitHub Pages frontend + Cloudflare Worker AI endpoint
 
-1. Extract the ZIP completely.
-2. Install Python 3 if it is not already installed.
-3. Double-click `START.bat`. Keep its window open while practicing.
+![Redesigned ICT Practice homepage](assets/screenshots/08-ui-home.png)
 
-Alternatively use VS Code Live Server, or run `python serve.py` in this folder. Opening `index.html` by double-clicking can block the JSON request; use a local server.
+## ✨ Learn → Try → Understand
 
-## Deploy
+| 🗂️ Practice | ✨ AI help | 🎯 Model test |
+|:--|:--|:--|
+| Color-coded chapter cards and one question per screen | **Hint before answering**, explanation after answering and follow-up questions | 20 / 50 / 100 mixed MCQs; answers hidden until submission |
 
-Upload `index.html`, `styles.css`, `script.js`, `config.js`, `data/` and `assets/fonts/` to the existing GitHub Pages / static hosting directory. Relative asset paths work in repository subdirectories. No npm installation is needed. The existing explanation endpoint is retained in `config.js`; its CORS policy must allow your hosting origin. API keys belong only in Worker secrets.
+![Focused MCQ practice](assets/screenshots/09-ui-practice.png)
 
-## What's changed
+## 🔌 AI integration
 
-- Compact dashboard, chapter cards, progress and saved-question counts.
-- Desktop sidebar and fixed mobile navigation.
-- One question at a time, a numbered question navigator and larger-text option.
-- Search, chapter/topic/status filters, saved questions and retry controls.
-- Clear correct/wrong feedback with text and symbols in addition to color.
-- Showing an answer no longer records a correct attempt.
-- 20/50/100-question mixed exams, saved answers, resume after reload, submission confirmation and result filters.
-- Explanation dialog with follow-up questions, connection errors, timeout and retry. Closing a request prevents it from reopening the dialog later.
-- Self-hosted Noto Sans Bengali variable font, Unicode normalization, readable spacing and a properly rendered truth table. Font license is included.
-- Defensive storage handling and a useful loading-error screen.
+```mermaid
+flowchart LR
+  A[Student picks a question] --> B{Learning mode}
+  B -->|Before answering| C[AI hint: no answer key]
+  B -->|After answering| D[Full explanation]
+  C --> E[Cloudflare Worker /explain]
+  D --> E
+  E --> F[Gemini API]
+  F -->|If unavailable| G[Workers AI fallback]
+  G -->|If unavailable| H[Static fallback]
+  F --> I[Bangla support + follow-up]
+  G --> I
+  H --> I
+```
 
-## Question data: read before using for formal assessment
+**Frontend request:** only the selected MCQ context is sent, never the entire question bank.
 
-All **277 original question IDs** and all original answer-key letters have been preserved. Recoverable Bengali words and passages were edited individually. Nine passages merged into preceding options were relocated to their associated question pairs. `data/text-corrections-audit.json` records before/after changes for every affected record.
+```js
+const response = await fetch(window.EXPLAIN_API_URL, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ prompt, questionId })
+});
+const { explanation } = await response.json();
+```
 
-**159 questions** remain in normal practice and exams. **118 questions** are retained in the `যাচাই প্রয়োজন` filter: missing options or context, unclear wording, duplicated alternatives, or questionable original keys. They cannot be scored, used in an exam or sent to the explanation service. This does not claim the remaining answer keys have been independently verified against a textbook.
+`config.js` stores the **public Worker URL**, not the Gemini API key. Keep API keys in **Cloudflare Worker Secrets**. AI responses are advisory and may contain mistakes. The hint prompt requests that the model not reveal the correct choice; it cannot guarantee that the model will comply.
 
-The original PDF/DOCX source documents were not included in the uploaded archive. Unrecoverable material and uncertain keys were not fabricated. Supply/consult those originals to resolve the review list and then set `needsReview` to `false` only after checking the complete question, options and answer.
+## 📱 Mobile friendly
 
-Local question edits must retain stable IDs. Existing saved questions and usable practice answers are imported from the original browser keys. New practice answers use a separate V2 key, preserving the original data. Historical answers cannot distinguish genuine attempts from the original site's Show Answer action, which counted as correct; use Settings → reset practice if you want a fresh score. The new Show Answer action never adds to the score.
+![Compact mobile practice view](assets/screenshots/10-ui-mobile.png)
 
-Progress remains specific to the browser and hosting origin. An export, cross-device account sync or automatic backup is not included. Exam answers are hidden in the interface until submission; like the original project, this is a client-side study tool rather than a secure exam platform.
+- One question at a time; optional question index and filters.
+- Clearly differentiated blue, purple and green chapters.
+- Visible **AI ইঙ্গিত** action before answering; **AI ব্যাখ্যা** after.
+- Local bookmarks, progress, exam resume and clear answer states.
 
-`README_original.md` and `assets/screenshots/` describe the previous design.
+## 🛠️ Run / update
+
+**Local:** double-click `START.bat` (Python 3), or run `python serve.py`. Do not open `index.html` directly; the JSON needs a local server.
+
+**GitHub Pages:** upload/update the files **inside this project folder** at your existing repository root (`index.html`, `script.js`, `styles.css`, `config.js`, `data/`, `assets/`). The Cloudflare Worker is deployed separately.
+
+**Data integrity:** the uploaded 277 question records and answer keys are unchanged by this redesign. As before, 118 source-review questions are not scored and are excluded from exams. See `VERIFICATION.md` and `data/text-corrections-audit.json`.

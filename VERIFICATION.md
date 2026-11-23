@@ -1,17 +1,21 @@
-# Verification
+# UI/UX Redesign Verification · 23 November 2026
 
-Checked on 23 November 2026.
+## Updated
+- Replaced the busy dashboard with a short primary action, one compact progress summary, and three distinctly color-coded chapter cards.
+- Collapsed optional question-index grid; kept one-question-at-a-time workflow, previous/next navigation and saved progress.
+- Collapsed filters by default on mobile to show the current question sooner.
+- Made the AI entry point visible **before** answering, via the question header and global AI button.
+- Pre-answer AI requests send only the MCQ and ask for a **hint** (no answer key). Post-answer requests include the key for a full explanation. Both offer follow-up questions.
+- Maintained 20/50/100 question exam modes. AI is intentionally unavailable during an active exam and becomes available after submission.
+- Simplified AI modal and safely formatted bold/list Markdown in generated explanations.
+- Kept existing frontend API URL, original question data, storage keys and Cloudflare backend routing unchanged.
 
-- JavaScript syntax check passed.
-- 277 unique original question IDs retained; original answer letters unchanged.
-- Unicode normalization and bundled Bengali-font glyph coverage checked.
-- 60 randomized test generations checked across 20/50/100-question sizes: unique IDs, balanced chapter selection, no review-only questions.
-- Scoring checks: revealed answers do not count as attempts; correct answers do.
-- Search, review filtering, malformed stored JSON and explanation success/rate-limit/empty-response handling checked programmatically.
-- Browser: desktop dashboard and practice; 390px/360px iframe viewports render mobile navigation without horizontal overflow.
-- Browser: practice answer checking, bookmarks, answer reveal, exam selection, hidden answers before submission, reload/resume at the saved question, incomplete submission confirmation, results and locked answers after submission checked.
-- Browser: database text and unscored review view checked.
-- The existing external AI endpoint could not be reached from the preview origin. Its user-facing connection-error state worked. Actual AI generation and follow-up require the existing Worker to be reachable and allow the deployed origin; backend configuration was not changed. API response paths were tested with mocks.
-- Source question documents were unavailable. This release repairs text and isolates ambiguity; it is not a complete factual verification of the question bank.
+## Checked
+- `node --check script.js` passed.
+- `node tests/check.cjs` passed for 277 original IDs, unchanged answer-key letters, exclusion of flagged MCQs, balanced exam sampling, score behaviour, search and API error responses.
+- Chromium browser preview using the **real included MCQ JSON** and mocked fetch responses passed for: dashboard, chapter selection, pre-answer hints without supplying answer keys, hint follow-up, post-answer full explanation, exam start/submission/review.
+- Browser previews at 1440px, 768px, 390px and 360px had no horizontal overflow.
+- No live request was made to the deployed Cloudflare Worker or Gemini; verify the external Worker from your deployed GitHub Pages origin separately. Mocked AI answers test the client workflow, not model accuracy.
 
-Run `node tests/check.cjs` to repeat the automated checks. Local launch requires Python 3; no additional packages are needed. The Windows launcher itself was not executed on Windows in this Linux environment.
+## Existing dataset limitations
+The question texts were not re-authored or fact-checked in this UI revision. Original review flags remain: 118 of 277 need source checks and are not scored/tested; 159 are usable. This design does not claim textbook verification of the remaining keys.
