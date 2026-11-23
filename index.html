@@ -1,120 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ICT MCQ Practice | Multi Chapter Exam</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#5354d8">
+  <meta name="description" content="অধ্যায়ভিত্তিক ICT অনুশীলন, মডেল টেস্ট ও সহজ বাংলা ব্যাখ্যা।">
+  <title>ICT Practice — শিখি, চর্চা করি</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app-shell">
-    <header class="hero">
-      <nav class="topbar">
-        <button class="brand" id="homeBtn" type="button" title="Home">
-          <span class="brand-icon">✦</span>
-          <span>ICT MCQ Practice</span>
-        </button>
-        <div class="top-actions">
-          <button class="btn exam-start" id="startExamBtnTop" type="button">🎯 Exam: 100 Random MCQ</button>
-          <div class="pill" id="totalPill">Loading...</div>
-        </div>
-      </nav>
-
-      <section class="hero-content">
-        <div>
-          <p class="eyebrow" id="modeLabel">Chapter Practice + Final Exam</p>
-          <h1 id="pageTitle">ICT MCQ Practice</h1>
-          <p class="subtitle" id="pageSubtitle">Choose a chapter for practice with Explain button, or start a 100-question mixed exam.</p>
-        </div>
-        <div class="score-card">
-          <span id="scoreLabel">Practice Score</span>
-          <strong id="scoreText">0 / 0</strong>
-          <small id="progressText">No answers yet</small>
-        </div>
-      </section>
-    </header>
-
-    <main>
-      <section class="chapter-grid" id="chapterGrid" aria-label="Chapter selection"></section>
-
-      <section class="exam-panel card" id="examIntro">
-        <div>
-          <span class="tag gold">Mixed Exam Mode</span>
-          <h2>১০০টি Random MCQ Exam</h2>
-          <p>প্রতিবার ক্লিক করলে সব অধ্যায় থেকে নতুন ১০০টি random MCQ আসবে। Exam চলাকালীন উত্তর দেখা যাবে না। Submit করার পর একসাথে score এবং correct answer দেখা যাবে।</p>
-        </div>
-        <button class="btn exam-start big" id="startExamBtn" type="button">Start New 100 MCQ Exam</button>
-      </section>
-
-      <section class="controls card" id="practiceControls">
-        <div class="field search-field">
-          <label for="searchInput">Search MCQ</label>
-          <input id="searchInput" type="search" placeholder="প্রশ্ন, অপশন বা উত্তর লিখুন..." />
-        </div>
-        <div class="field">
-          <label for="chapterFilter">Chapter</label>
-          <select id="chapterFilter">
-            <option value="all">সব অধ্যায়</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="topicFilter">Topic</label>
-          <select id="topicFilter">
-            <option value="all">সব টপিক</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="statusFilter">Status</label>
-          <select id="statusFilter">
-            <option value="all">সব প্রশ্ন</option>
-            <option value="unanswered">Unanswered</option>
-            <option value="correct">Correct</option>
-            <option value="wrong">Wrong</option>
-            <option value="review">Need review</option>
-            <option value="bookmarked">Bookmarked</option>
-          </select>
-        </div>
-        <button class="btn ghost" id="resetBtn" type="button">Reset Progress</button>
-      </section>
-
-      <section class="exam-toolbar card" id="examToolbar" hidden>
-        <div>
-          <span class="tag gold">Exam Running</span>
-          <h2>Mixed 100 MCQ Exam</h2>
-          <p id="examInfo">Answer all questions. You will see the correct answers only after submission.</p>
-        </div>
-        <div class="exam-actions">
-          <button class="btn ghost" id="newExamBtn" type="button">New Random Exam</button>
-          <button class="btn exam-submit" id="submitExamBtn" type="button">Submit Exam</button>
-        </div>
-      </section>
-
-      <section class="exam-result card" id="examResult" hidden></section>
-
-      <section id="mcqList" class="mcq-list" aria-live="polite"></section>
-    </main>
-  </div>
-
-  <dialog id="explainDialog" class="explain-dialog">
-    <div class="dialog-head">
-      <h2 id="dialogTitle">Explanation ✨</h2>
-      <button class="icon-btn" id="closeDialog" aria-label="Close">×</button>
-    </div>
-    <div id="explainContent" class="explain-content"></div>
-    <div id="followupBox" class="followup-box" hidden>
-      <label for="followupInput">Still confused? Ask your own question</label>
-      <textarea id="followupInput" rows="3" placeholder="Example: আমি এখনো বুঝিনি কেন এই উত্তরটি সঠিক..."></textarea>
-      <div class="followup-actions">
-        <button class="btn explain" id="askFollowupBtn" type="button">Ask Explanation</button>
-      </div>
-      <div id="followupHistory" class="followup-history"></div>
-    </div>
-  </dialog>
-
-  <script src="config.js"></script>
-  <script src="script.js"></script>
-</body>
-</html>
+<a class="skip-link" href="#main">মূল কনটেন্টে যান</a>
+<aside class="sidebar">
+  <a class="brand" href="#home" aria-label="ICT Practice হোম"><span class="brand-symbol">i<span>c</span>t.</span><span>ICT Practice<small>LEARN. PRACTICE. GROW.</small></span></a>
+  <p class="nav-label">তোমার পড়ার জায়গা</p>
+  <nav class="main-nav" aria-label="প্রধান মেনু">
+    <button data-view="home" class="nav-item active"><span data-icon="home"></span><span>হোম</span></button>
+    <button data-view="practice" class="nav-item"><span data-icon="book"></span><span>অনুশীলন</span></button>
+    <button data-view="saved" class="nav-item"><span data-icon="bookmark"></span><span>সংরক্ষিত</span><span id="savedBadge" class="nav-badge">0</span></button>
+    <button data-view="exam" class="nav-item"><span data-icon="exam"></span><span>মডেল টেস্ট</span></button>
+  </nav>
+  <div class="sidebar-bottom"><div class="study-tip"><span data-icon="spark"></span><strong>ছোট ছোট চর্চা।<br>বড় প্রস্তুতি।</strong><p>প্রতিদিন একটু সময় নিজের জন্য।</p></div><button class="text-button settings-button" id="settingsBtn"><span data-icon="settings"></span> সেটিংস</button><span class="local-note">অগ্রগতি এই ব্রাউজারে সেভ হয়</span></div>
+</aside>
+<div class="workspace">
+  <header class="topbar"><div class="breadcrumb"><span>তথ্য ও যোগাযোগ প্রযুক্তি</span><span class="divider">/</span><strong id="viewLabel">ড্যাশবোর্ড</strong></div><div class="header-actions"><span class="level-chip">HSC · ICT</span><button class="icon-button" id="fontBtn" aria-label="লেখা বড় করুন" title="লেখার আকার" aria-pressed="false">A<span class="font-plus">+</span></button></div></header>
+  <main id="main" tabindex="-1"><div class="loading-state"><span class="spinner"></span><p>প্রশ্নগুলো প্রস্তুত হচ্ছে…</p></div></main>
+  <footer class="footer"><span>ICT Practice</span><span>নিজের গতিতে শেখো।</span></footer>
+</div>
+<div id="toast" class="toast" role="status" hidden></div>
+<dialog id="explainDialog" class="dialog" aria-labelledby="dialogTitle"><div class="dialog-head"><div><span class="eyebrow">ICT PRACTICE</span><h2 id="dialogTitle">সহজ ব্যাখ্যা</h2></div><button id="closeDialog" class="icon-button" aria-label="বন্ধ করুন">✕</button></div><div id="explainContent" class="dialog-body"></div><form id="followupBox" class="followup-box" hidden><label for="followupInput">আর কী জানতে চাও?</label><div class="followup-input"><textarea id="followupInput" rows="2" maxlength="1500" placeholder="তোমার প্রশ্ন লিখো…" required></textarea><button id="askFollowupBtn" class="button primary" type="submit">জিজ্ঞেস করো</button></div><div id="followupHistory" aria-live="polite"></div></form></dialog>
+<dialog id="confirmDialog" class="dialog small-dialog" aria-labelledby="confirmTitle"><div class="dialog-body"><h2 id="confirmTitle">নিশ্চিত?</h2><p id="confirmText"></p><div class="dialog-actions"><button id="cancelConfirm" class="button secondary">ফিরে যাই</button><button id="acceptConfirm" class="button primary">নিশ্চিত</button></div></div></dialog>
+<dialog id="settingsDialog" class="dialog small-dialog" aria-labelledby="settingsTitle"><div class="dialog-head"><h2 id="settingsTitle">সেটিংস</h2><button id="closeSettings" class="icon-button" aria-label="বন্ধ করুন">✕</button></div><div class="dialog-body"><h3>তোমার অগ্রগতি</h3><p>উত্তর, সংরক্ষিত প্রশ্ন ও টেস্ট এই ব্রাউজারেই থাকে। অন্য ডিভাইসে স্বয়ংক্রিয়ভাবে সিঙ্ক হয় না।</p><button id="resetBtn" class="button danger">অনুশীলনের অগ্রগতি মুছুন</button><p class="muted small">সংরক্ষিত প্রশ্ন ও বর্তমান টেস্ট থাকবে।</p></div></dialog>
+<noscript>অনুশীলন চালু করতে ব্রাউজারে JavaScript চালু করুন।</noscript>
+<script src="config.js"></script><script src="script.js"></script>
+</body></html>

@@ -1,685 +1,132 @@
-const STORAGE_PREFIX = 'ictMcqMultiV1';
-
-const state = {
-  chapters: [],
-  allMcqs: [],
-  mcqs: [],
-  mode: 'practice',
-  activeChapter: 'all',
-  examQuestions: [],
-  examSubmitted: false,
-  examStartedAt: null,
-  answers: JSON.parse(localStorage.getItem(`${STORAGE_PREFIX}:practiceAnswers`) || '{}'),
-  examAnswers: {},
-  bookmarks: JSON.parse(localStorage.getItem(`${STORAGE_PREFIX}:bookmarks`) || '[]'),
-  explanations: JSON.parse(localStorage.getItem(`${STORAGE_PREFIX}:explanations`) || '{}'),
-  filters: { search: '', topic: 'all', status: 'all' },
-  activeQuestion: null
+'use strict';
+const PREFIX = 'ictMcqMultiV1';
+const $ = id => document.getElementById(id);
+const escapeHtml = (v = '') => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const bn = n => Number(n).toLocaleString('bn-BD');
+function readStore(key, fallback) { try { const v = JSON.parse(localStorage.getItem(`${PREFIX}:${key}`)); return v !== null && typeof v === typeof fallback && Array.isArray(v) === Array.isArray(fallback) ? v : fallback; } catch { return fallback; } }
+let storageWarned = false;
+function writeStore(key, value) { try { localStorage.setItem(`${PREFIX}:${key}`, JSON.stringify(value)); } catch { if (!storageWarned) { storageWarned = true; toast('ব্রাউজারে সেভ করা যাচ্ছে না। এই ট্যাবেই চর্চা চালিয়ে যেতে পারো।'); } } }
+const state = { chapters:[], questions:[], view:'home', chapter:'all', topic:'all', status:'all', feedbackId:null, search:'', index:0, examSize:100, examFilter:'all', answers:readStore('practiceAnswersV2',readStore('practiceAnswers',{})), drafts:readStore('draftsV2',{}), revealed:readStore('revealedV2',[]), bookmarks:readStore('bookmarks',[]), explanations:readStore('explanationsV2',{}), exam:readStore('examV2',{}), last:readStore('lastV2',{}), navOpen:window.innerWidth>900, loaded:false };
+const iconPaths = {
+ home:'<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>',
+ book:'<path d="M12 5v16M3 4c4-1 7-1 9 1 2-2 5-2 9-1v15c-4-1-7-1-9 2-2-3-5-3-9-2Z"/>',
+ bookmark:'<path d="M6 4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17l-6-4-6 4Z"/>',
+ exam:'<rect x="5" y="4" width="14" height="18" rx="2"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="m8 13 3 3 5-6"/>',
+ spark:'<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/><path d="M20 2v4m-2-2h4"/>',
+ settings:'<path d="M9 3h6l1 3 3 1 2 5-2 5-3 1-1 3H9l-1-3-3-1-2-5 2-5 3-1Z"/><circle cx="12" cy="12" r="3"/>',
+ globe:'<circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/>',
+ circuit:'<rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 3v3m6-3v3M9 18v3m6-3v3M3 9h3m-3 6h3m12-6h3m-3 6h3"/>',
+ database:'<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0"/>',
+ check:'<path d="m5 12 4 4L19 6"/>',
+ target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+ search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ shield:'<path d="m12 3 8 3v6c0 4-4 7-8 9-4-2-8-5-8-9V6Z"/><path d="m8 12 3 3 5-6"/>',
+ info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.1"/>',
+ chevron:'<path d="m6 9 6 6 6-6"/>',
+ play:'<path d="m9 5 11 7-11 7Z"/>',
+ reset:'<path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/>'
 };
-
-const $ = (id) => document.getElementById(id);
-const list = $('mcqList');
-
-function saveProgress() {
-  localStorage.setItem(`${STORAGE_PREFIX}:practiceAnswers`, JSON.stringify(state.answers));
-  localStorage.setItem(`${STORAGE_PREFIX}:bookmarks`, JSON.stringify(state.bookmarks));
-  localStorage.setItem(`${STORAGE_PREFIX}:explanations`, JSON.stringify(state.explanations));
+function icon(name){return `<svg viewBox="0 0 24 24" aria-hidden="true">${iconPaths[name]||iconPaths.book}</svg>`;}
+document.querySelectorAll('[data-icon]').forEach(e=>e.innerHTML=icon(e.dataset.icon));
+const chapterUI = {ch1:{name:'তথ্য ও যোগাযোগ প্রযুক্তি',label:'প্রথম অধ্যায়',short:'বিশ্ব ও বাংলাদেশ',detail:'বিশ্বগ্রাম · AI · রোবোটিক্স',icon:'globe'},ch3:{name:'সংখ্যা পদ্ধতি ও ডিজিটাল সিস্টেম',label:'তৃতীয় অধ্যায়',short:'সংখ্যা ও ডিজিটাল সিস্টেম',detail:'সংখ্যা পদ্ধতি · লজিক গেট',icon:'circuit'},db:{name:'ডেটাবেজ ম্যানেজমেন্ট',label:'ডেটাবেজ',short:'ডেটাবেজ ম্যানেজমেন্ট',detail:'SQL · টেবিল · রিলেশন',icon:'database'}};
+function chapterInfo(id){return chapterUI[id] || {name:state.chapters.find(c=>c.id===id)?.title||id,label:'অধ্যায়',detail:'ICT',icon:'book'};}
+function usable(q){return !q.needsReview && q.options.length>=2 && q.options.some(o=>o.label===q.correctLetter);}
+function bookmarked(id){return state.bookmarks.includes(id);}
+function answerText(q){return q.options.find(o=>o.label===q.correctLetter)?.text || '';}
+function savePractice(){writeStore('practiceAnswersV2',state.answers);writeStore('draftsV2',state.drafts);writeStore('revealedV2',state.revealed);writeStore('bookmarks',state.bookmarks);}
+function saveExam(){writeStore('examV2',state.exam);}
+let toastTimer;
+function toast(text){$('toast').textContent=text;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,3800);}
+function confirmAction(title,text,action){return new Promise(resolve=>{const d=$('confirmDialog');$('confirmTitle').textContent=title;$('confirmText').textContent=text;$('acceptConfirm').textContent=action;$('acceptConfirm').onclick=()=>{d.close();resolve(true);};$('cancelConfirm').onclick=()=>{d.close();resolve(false);};d.oncancel=()=>resolve(false);d.showModal();});}
+function stats(qs=state.questions.filter(usable)){const answered=qs.filter(q=>state.answers[q.id]);return {total:qs.length,answered:answered.length,correct:answered.filter(q=>state.answers[q.id]===q.correctLetter).length};}
+function statCard(ico,value,label){return `<div class="stat-card"><div class="stat-icon">${icon(ico)}</div><div><div class="stat-value">${value}</div><div class="stat-label">${label}</div></div></div>`;}
+function progress(value){return `<div class="progress-track"><span style="width:${Math.min(100,Math.max(0,value))}%"></span></div>`;}
+function header(title,sub,extra=''){return `<div class="page-heading"><div><h1>${title}</h1><p>${sub}</p></div>${extra}</div>`;}
+function empty(title,sub,button=''){return `<div class="empty-state">${icon('search')}<h2>${title}</h2><p>${sub}</p>${button}</div>`;}
+function renderHome(){const s=stats();const last=state.questions.find(q=>q.id===state.last.id&&usable(q));const review=state.questions.filter(q=>!usable(q)).length;return `
+ <div class="welcome"><div><span class="eyebrow">LET’S MAKE PROGRESS</span><h1>একটু চর্চা, অনেকটা এগিয়ে।</h1><p>তোমার ICT প্রস্তুতি, তোমার গতিতে।</p></div><span class="date">${new Date().toLocaleDateString('bn-BD',{day:'numeric',month:'long',year:'numeric'})}</span></div>
+ <section class="dashboard-hero"><div class="hero-copy"><span class="eyebrow">${last?'KEEP THE MOMENTUM':'YOUR NEXT SMALL STEP'}</span><h2>${last?'যেখান থেকে থেমেছিলে':'আজ কী শিখতে চাও?'}</h2><p>${last?escapeHtml(chapterInfo(last.chapterId).name):'একটি অধ্যায় বেছে নাও। শেখো, উত্তর দাও, বুঝে নাও।'}</p><button class="button primary" data-action="continue">${icon('play')}${last?'অনুশীলন চালিয়ে যাও':'অনুশীলন শুরু করো'}</button></div><div class="hero-art" aria-hidden="true"><svg viewBox="0 0 230 190"><circle class="orb" cx="125" cy="95" r="83"/><rect class="paper" x="62" y="30" width="114" height="139" rx="12" transform="rotate(11 119 100)"/><rect class="paper" x="52" y="24" width="114" height="139" rx="12"/><path d="M73 51h58M73 62h42M91 91h51M91 114h51M91 137h34" stroke="#a5a5d3" stroke-width="3"/><rect x="70" y="83" width="13" height="13" rx="4" fill="#7374d9"/><rect x="70" y="106" width="13" height="13" rx="4" fill="#7374d9"/><rect x="70" y="129" width="13" height="13" rx="4" fill="#e9e9fb"/><circle cx="173" cy="134" r="26" fill="#6263cf"/><path class="tick" d="m162 134 8 8 14-17"/><path d="m181 35 3 8 8 3-8 3-3 8-3-8-8-3 8-3Z" fill="#a8a8e5" stroke="none"/></svg></div></section>
+ <section class="stats-grid" aria-label="অনুশীলনের অগ্রগতি">${statCard('book',bn(s.answered),`উত্তর দিয়েছ · ${bn(s.total)}টি প্রস্তুত`)}${statCard('target',s.answered?bn(Math.round(s.correct/s.answered*100))+'%':'—','সঠিক উত্তরের হার')}${statCard('bookmark',bn(state.bookmarks.length),'সংরক্ষিত প্রশ্ন')}</section>
+ <section><div class="section-head"><div><h2>অধ্যায় বেছে নাও</h2><p>একটি বিষয় দিয়ে শুরু হোক আজকের চর্চা।</p></div><button class="text-button" data-view="practice">সব প্রশ্ন</button></div><div class="chapter-grid">${state.chapters.map(ch=>{const ui=chapterInfo(ch.id),cs=stats(state.questions.filter(q=>q.chapterId===ch.id&&usable(q)));return `<button class="chapter-card" data-chapter="${escapeHtml(ch.id)}"><div class="chapter-top"><span class="chapter-icon">${icon(ui.icon)}</span><span class="chapter-kicker">${ui.label}</span></div><h3>${ui.name}</h3><p class="chapter-description">${ui.detail}</p><div class="chapter-bottom"><strong>${bn(cs.total)}টি প্রশ্ন</strong><span>${bn(cs.answered)}টি শেষ</span></div>${progress(cs.answered/Math.max(1,cs.total)*100)}</button>`;}).join('')}</div></section>
+ <div class="dashboard-bottom"><section class="exam-banner"><div class="stat-icon">${icon('exam')}</div><div><h3>প্রস্তুতিটা যাচাই হোক</h3><p>সব অধ্যায় মিলিয়ে একটি মডেল টেস্ট।</p></div><button class="button" data-view="exam">টেস্ট দাও</button></section><section class="review-note-card">${icon('shield')}<div><strong>পরিষ্কার প্রশ্নে নিশ্চিন্ত চর্চা</strong><p>${bn(review)}টি প্রশ্নে উৎস যাচাই বাকি। স্কোরে ধরা হয় না।</p><button class="text-button" data-action="review">যাচাইয়ের তালিকা দেখো</button></div></section></div>
+ <button class="text-button mobile-settings" data-action="settings">${icon('settings')} সেটিংস</button>`;}
+function practicePool(){const search=state.search.normalize('NFC').trim().toLocaleLowerCase();return state.questions.filter(q=>{
+ if(state.chapter!=='all'&&q.chapterId!==state.chapter)return false;
+ if(state.topic!=='all'&&q.topic!==state.topic)return false;
+ if(state.view==='saved'&&!bookmarked(q.id))return false;
+ if(state.status==='review'){if(usable(q))return false;} else if(!usable(q))return false;
+ const a=state.answers[q.id];
+ if(state.feedbackId===q.id)return true;
+ if(state.status==='unanswered'&&a)return false;
+ if(state.status==='correct'&&a!==q.correctLetter)return false;
+ if(state.status==='wrong'&&(!a||a===q.correctLetter))return false;
+ if(search&&!([q.question,q.stimulus,q.topic,...q.options.map(o=>o.text)].join(' ').normalize('NFC').toLocaleLowerCase().includes(search)))return false;
+ return true;
+ });}
+function examPool(){if(!state.exam.questions)return [];return state.exam.questions.map(id=>state.questions.find(q=>q.id===id)).filter(Boolean).filter(q=>{const a=state.exam.answers[q.id];if(!state.exam.submitted)return true;return state.examFilter==='all'||(state.examFilter==='correct'&&a===q.correctLetter)||(state.examFilter==='wrong'&&a&&a!==q.correctLetter)||(state.examFilter==='unanswered'&&!a);});}
+function currentPool(){return state.view==='examRun'?examPool():practicePool();}
+function filters(){const topics=[...new Set(state.questions.filter(q=>state.chapter==='all'||q.chapterId===state.chapter).map(q=>q.topic).filter(Boolean))];return `<div class="filters"><div class="field"><label for="searchInput">প্রশ্ন খোঁজো</label><div class="search-wrap">${icon('search')}<input id="searchInput" type="search" placeholder="কোন বিষয় খুঁজছ?" value="${escapeHtml(state.search)}"></div></div><div class="field"><label for="chapterFilter">অধ্যায়</label><select id="chapterFilter"><option value="all">সব অধ্যায়</option>${state.chapters.map(c=>`<option value="${escapeHtml(c.id)}" ${c.id===state.chapter?'selected':''}>${chapterInfo(c.id).label}</option>`).join('')}</select></div><div class="field"><label for="topicFilter">বিষয়</label><select id="topicFilter"><option value="all">সব বিষয়</option>${topics.map(t=>`<option ${t===state.topic?'selected':''}>${escapeHtml(t)}</option>`).join('')}</select></div><div class="field"><label for="statusFilter">প্রশ্নের অবস্থা</label><select id="statusFilter">${Object.entries({all:'অনুশীলনের প্রশ্ন',unanswered:'উত্তর দেওয়া বাকি',wrong:'ভুল উত্তর',correct:'সঠিক উত্তর',review:'যাচাই প্রয়োজন'}).map(([v,t])=>`<option value="${v}" ${v===state.status?'selected':''}>${t}</option>`).join('')}</select></div></div>`;}
+function renderPractice(){const title=state.view==='saved'?'সংরক্ষিত প্রশ্ন':state.status==='review'?'উৎস যাচাইয়ের তালিকা':state.chapter==='all'?'চলো, অনুশীলন করি':chapterInfo(state.chapter).name;return header(title,state.view==='saved'?'পরে পড়ার জন্য রাখা প্রশ্নগুলো।':state.status==='review'?'এসব প্রশ্ন অনুশীলনের স্কোর ও টেস্টে অন্তর্ভুক্ত নয়।':'উত্তর বেছে নাও। মিলিয়ে দেখো। বুঝে এগোও।',`<span class="count-chip" id="poolCount"></span>`)+filters()+'<div id="questionArea"></div>';}
+function tableHtml(t){if(!t)return '';return `<table><thead><tr>${t.headers.map(v=>`<th scope="col">${escapeHtml(v)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r=>`<tr>${r.map(v=>`<td>${escapeHtml(v)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;}
+function renderQuestion(q){const exam=state.view==='examRun',submitted=exam&&state.exam.submitted;const answer=exam?state.exam.answers[q.id]:state.answers[q.id];const revealed=!exam&&state.revealed.includes(q.id);const locked=exam?submitted:!!answer||revealed;const showCorrect=usable(q)&&(submitted||(!exam&&locked));const draft=exam?answer:answer||state.drafts[q.id];const ready=usable(q);
+ return `<article class="question-card" data-id="${escapeHtml(q.id)}"><div class="question-top"><div class="question-kicker"><span class="question-number">${escapeHtml(q.id)}</span><span>${chapterInfo(q.chapterId).label}</span></div><button class="icon-button bookmark ${bookmarked(q.id)?'active':''}" data-action="bookmark" aria-label="${bookmarked(q.id)?'সংরক্ষণ সরান':'প্রশ্ন সংরক্ষণ করুন'}" title="${bookmarked(q.id)?'সংরক্ষিত':'সংরক্ষণ'}" aria-pressed="${bookmarked(q.id)}">${icon('bookmark')}</button></div>${q.stimulus||q.stimulusTable?`<details class="stimulus" open><summary>উদ্দীপক</summary>${escapeHtml(q.stimulus)}${tableHtml(q.stimulusTable)}</details>`:''}<h2 class="question-title" id="questionTitle" tabindex="-1">${escapeHtml(q.question)}</h2><div class="options" role="radiogroup" aria-labelledby="questionTitle">${q.options.map(o=>{const correct=showCorrect&&o.label===q.correctLetter,wrong=showCorrect&&answer===o.label&&o.label!==q.correctLetter;return `<label class="option ${correct?'correct':''} ${wrong?'wrong':''} ${locked||!ready?'locked':''}"><input type="radio" name="answer" value="${escapeHtml(o.label)}" ${draft===o.label?'checked':''} ${locked||!ready?'disabled':''}><span class="letter">${escapeHtml(o.label)}</span><span class="option-text">${escapeHtml(o.text)}</span>${correct||wrong?`<span class="option-status" aria-label="${correct?'সঠিক উত্তর':'ভুল উত্তর'}">${correct?'✓':'✕'}</span>`:''}</label>`;}).join('')}</div>
+ ${!ready?'<div class="quality-note">এই প্রশ্নের মূল উৎস বা উত্তরসূচি যাচাই বাকি। যাচাইয়ের আগে উত্তর ও স্কোর দেখানো হচ্ছে না।</div>':''}
+ ${showCorrect?`<div class="feedback ${answer?answer===q.correctLetter?'good':'bad':'neutral'}" role="status"><strong>${answer?answer===q.correctLetter?'সঠিক উত্তর!':'এবার মেলেনি।':exam?'উত্তর দেওয়া হয়নি।':'উত্তর দেখেছ · স্কোরে যোগ হয়নি।'}</strong><br>সঠিক উত্তর: ${escapeHtml(q.correctLetter)}. ${escapeHtml(answerText(q))}</div>`:''}
+ ${ready&&!exam?`<div class="question-actions"><div class="button-row">${!locked?`<button class="button primary" data-action="check" ${!draft?'disabled':''}>উত্তর মিলিয়ে দেখো</button><button class="text-button" data-action="reveal">উত্তর দেখো</button>`:`<button class="button secondary" data-action="retry">${icon('reset')}আবার চেষ্টা</button>`}</div>${locked?`<button class="text-button" data-action="explain">${icon('spark')}ব্যাখ্যা বুঝে নাও</button>`:''}</div>`:''}
+ ${exam?submitted?`<div class="question-actions"><button class="text-button" data-action="explain">${icon('spark')}ব্যাখ্যা বুঝে নাও</button></div>`:'<p class="exam-running-note">উত্তর সেভ হয়েছে কি না প্রশ্ন তালিকায় দেখো। জমা দেওয়ার পর সঠিক উত্তর দেখা যাবে।</p>':''}</article>`;
 }
-
-function escapeHtml(text = '') {
-  return String(text).replace(/[&<>'"]/g, ch => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    "'": '&#39;',
-    '"': '&quot;'
-  }[ch]));
+function navigator(pool){const exam=state.view==='examRun';const answered=pool.filter(q=>exam?state.exam.answers[q.id]:state.answers[q.id]).length;return `<details class="navigator" ${state.navOpen?'open':''}><summary>প্রশ্ন তালিকা ${icon('chevron')}</summary><div class="nav-progress"><p><span>${bn(answered)}টি উত্তর দিয়েছ</span><span>${bn(pool.length)}টি প্রশ্ন</span></p>${progress(answered/Math.max(pool.length,1)*100)}</div><div class="question-grid" aria-label="প্রশ্নে যান">${pool.map((q,i)=>{const a=exam?state.exam.answers[q.id]:state.answers[q.id],wrong=a&&a!==q.correctLetter&&(!exam||state.exam.submitted);return `<button class="question-dot ${i===state.index?'current':''} ${a?(wrong?'wrong':'answered'):!exam&&state.drafts[q.id]?'drafted':''}" data-jump="${i}" aria-label="প্রশ্ন ${bn(i+1)}${a?' · উত্তর দেওয়া হয়েছে':''}" ${i===state.index?'aria-current="true"':''}>${i+1}</button>`;}).join('')}</div><div class="legend"><span><i class="current"></i>বর্তমান</span><span><i class="done"></i>উত্তর দেওয়া</span><span><i></i>বাকি</span></div><p class="navigator-note">${exam?'প্রশ্নের নম্বরে ক্লিক করে যেকোনো প্রশ্নে যাও।':'ভুল হলে থেমো না। ব্যাখ্যা দেখে আবার চেষ্টা করো।'}</p></details>`;}
+function drawQuestion(focus=false){const pool=currentPool();state.index=Math.min(Math.max(0,state.index),Math.max(0,pool.length-1));if($('poolCount'))$('poolCount').textContent=`${bn(pool.length)}টি প্রশ্ন`;if(!pool.length){$('questionArea').innerHTML=empty(state.view==='saved'?'এখানে এখনো কোনো প্রশ্ন নেই':'এই ফিল্টারে প্রশ্ন পাওয়া যায়নি',state.view==='saved'?'প্রশ্নের বুকমার্ক চিহ্নে চাপ দিয়ে এখানে রাখো।':'অন্য বিষয় বা ফিল্টার বেছে নাও।',`<button class="button soft" data-action="clear-filters">${state.view==='examRun'?'সব উত্তর দেখো':'সব অনুশীলন দেখো'}</button>`);return;}
+ const q=pool[state.index];$('questionArea').innerHTML=`<div class="practice-layout"><div>${renderQuestion(q)}<div class="question-footer"><button class="button secondary" data-action="previous" ${state.index===0?'disabled':''}>আগের প্রশ্ন</button><span class="position">${bn(state.index+1)} / ${bn(pool.length)}</span><button class="button primary" data-action="next" ${state.index===pool.length-1?'disabled':''}>পরের প্রশ্ন</button></div></div>${navigator(pool)}</div>`;
+ $('questionArea').querySelector('.navigator').addEventListener('toggle',e=>{state.navOpen=e.target.open;});
+ if(state.view!=='examRun'&&usable(q)){state.last={id:q.id};writeStore('lastV2',state.last);}else if(state.view==='examRun'){state.exam.cursor=q.id;saveExam();}
+ if(focus)$('questionTitle').focus({preventScroll:true});
 }
-
-function shuffle(array) {
-  const arr = [...array];
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
-function getChapter(id) {
-  return state.chapters.find(c => c.id === id);
-}
-
-function isExamEligible(q) {
-  return q.correctLetter && Array.isArray(q.options) && q.options.length >= 2;
-}
-
-function getOptionText(q, letter) {
-  const found = (q.options || []).find(o => o.label === letter);
-  return found ? found.text : 'উৎস ফাইলে অস্পষ্ট';
-}
-
-function isBookmarked(id) {
-  return state.bookmarks.includes(String(id));
-}
-
-function setHeroForPractice() {
-  state.mode = 'practice';
-  $('modeLabel').textContent = 'Chapter Practice Mode';
-  const chapter = state.activeChapter === 'all' ? null : getChapter(state.activeChapter);
-  $('pageTitle').textContent = chapter ? chapter.title : 'সব অধ্যায়ের Practice';
-  $('pageSubtitle').textContent = chapter
-    ? `${chapter.subtitle || ''} — প্রতিটি MCQ practice করতে পারবেন এবং Explain button ব্যবহার করতে পারবেন।`
-    : 'সব অধ্যায় একসাথে practice করুন, অথবা নির্দিষ্ট chapter নির্বাচন করুন।';
-  $('scoreLabel').textContent = 'Practice Score';
-}
-
-function updateScore() {
-  if (state.mode === 'exam') {
-    const total = state.examQuestions.length;
-    const answered = Object.keys(state.examAnswers).length;
-    if (!state.examSubmitted) {
-      $('scoreText').textContent = `${answered} / ${total}`;
-      $('progressText').textContent = 'Answered in exam';
-    } else {
-      const correct = state.examQuestions.filter(q => state.examAnswers[q.id] === q.correctLetter).length;
-      $('scoreText').textContent = `${correct} / ${total}`;
-      $('progressText').textContent = `${Math.round((correct / Math.max(total, 1)) * 100)}% final score`;
-    }
-    $('totalPill').textContent = `${state.allMcqs.length} MCQs`;
-    return;
-  }
-
-  const scope = filteredByChapter();
-  const answered = scope.filter(q => state.answers[q.id]).length;
-  const correct = scope.filter(q => state.answers[q.id] && state.answers[q.id] === q.correctLetter).length;
-  $('scoreText').textContent = `${correct} / ${answered}`;
-  $('progressText').textContent = answered ? `${answered} answered from ${scope.length}` : 'No answers yet';
-  $('totalPill').textContent = `${state.allMcqs.length} MCQs`;
-}
-
-function buildChapterCards() {
-  $('chapterGrid').innerHTML = state.chapters.map(ch => `
-    <button class="chapter-card ${state.activeChapter === ch.id ? 'active' : ''}" type="button" data-chapter="${escapeHtml(ch.id)}">
-      <span class="tag">${escapeHtml(ch.shortTitle || ch.title)}</span>
-      <h3>${escapeHtml(ch.title)}</h3>
-      <p>${escapeHtml(ch.subtitle || '')}</p>
-      <div class="chapter-stats">
-        <span class="tag">${ch.count || 0} Practice MCQ</span>
-        <span class="tag">${ch.examEligible || 0} Exam Ready</span>
-      </div>
-    </button>
-  `).join('');
-}
-
-function buildFilters() {
-  $('chapterFilter').insertAdjacentHTML(
-    'beforeend',
-    state.chapters.map(ch => `<option value="${escapeHtml(ch.id)}">${escapeHtml(ch.shortTitle || ch.title)}</option>`).join('')
-  );
-
-  const topics = [...new Set(state.allMcqs.map(q => q.topic).filter(Boolean))];
-  $('topicFilter').insertAdjacentHTML(
-    'beforeend',
-    topics.map(t => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('')
-  );
-}
-
-function filteredByChapter() {
-  return state.allMcqs.filter(q => state.activeChapter === 'all' || q.chapterId === state.activeChapter);
-}
-
-function filteredMcqs() {
-  const s = state.filters.search.trim().toLowerCase();
-  return filteredByChapter().filter(q => {
-    const selected = state.answers[q.id];
-    const isCorrect = selected && selected === q.correctLetter;
-    const haystack = [
-      q.question,
-      q.stimulus,
-      q.topic,
-      q.section,
-      q.chapterTitle,
-      q.answerRaw,
-      ...(q.options || []).map(o => o.text)
-    ].join(' ').toLowerCase();
-
-    const matchSearch = !s || haystack.includes(s);
-    const matchTopic = state.filters.topic === 'all' || q.topic === state.filters.topic;
-    let matchStatus = true;
-
-    if (state.filters.status === 'unanswered') matchStatus = !selected;
-    if (state.filters.status === 'correct') matchStatus = Boolean(isCorrect);
-    if (state.filters.status === 'wrong') matchStatus = Boolean(selected && !isCorrect);
-    if (state.filters.status === 'review') matchStatus = q.needsReview;
-    if (state.filters.status === 'bookmarked') matchStatus = isBookmarked(q.id);
-
-    return matchSearch && matchTopic && matchStatus;
-  });
-}
-
-function renderPracticeCard(q) {
-  const selected = state.answers[q.id];
-  const answered = Boolean(selected);
-  const correctText = getOptionText(q, q.correctLetter);
-  const canAnswer = Array.isArray(q.options) && q.options.length > 0 && q.correctLetter;
-
-  const optionsHtml = (q.options || []).map(opt => {
-    let cls = 'option';
-    if (answered && opt.label === q.correctLetter) cls += ' correct';
-    if (answered && opt.label === selected && selected !== q.correctLetter) cls += ' wrong';
-
-    return `
-      <label class="${cls}">
-        <input type="radio" name="q-${q.id}" value="${escapeHtml(opt.label)}" ${selected === opt.label ? 'checked' : ''} ${answered ? 'disabled' : ''} />
-        <span class="letter">${escapeHtml(opt.label)}</span>
-        <span>${escapeHtml(opt.text)}</span>
-      </label>`;
-  }).join('');
-
-  const review = q.needsReview ? `<span class="tag review">Need review</span>` : '';
-  const reviewNotes = q.needsReview
-    ? `<div class="review-note">⚠ উৎস ফাইল থেকে এই প্রশ্ন/উত্তরটি একবার যাচাই করা ভালো। ${escapeHtml((q.reviewNotes || []).join(' '))}</div>`
-    : '';
-
-  const feedback = answered
-    ? `<div class="feedback ${selected === q.correctLetter ? 'good' : 'bad'}">
-        ${selected === q.correctLetter ? '✅ Correct!' : '❌ Wrong.'}
-        সঠিক উত্তর: <strong>${escapeHtml(q.correctLetter || '?')}) ${escapeHtml(correctText)}</strong>
-      </div>`
-    : '';
-
-  const noOptions = !q.options || !q.options.length
-    ? `<div class="review-note">এই প্রশ্নের অপশন PDF extraction থেকে পরিষ্কারভাবে পাওয়া যায়নি। পরে manual review করে ঠিক করুন।</div>`
-    : '';
-
-  return `
-    <article class="mcq-card" data-id="${escapeHtml(q.id)}">
-      <div class="question-meta">
-        <span class="tag">#${escapeHtml(q.id)}</span>
-        <span class="tag">${escapeHtml(q.chapterTitle || '')}</span>
-        <span class="tag">${escapeHtml(q.topic || '')}</span>
-        ${review}
-      </div>
-      ${q.stimulus ? `<div class="stimulus">${escapeHtml(q.stimulus)}</div>` : ''}
-      <h2 class="question-title">${escapeHtml(q.question)}</h2>
-      <div class="options">${optionsHtml}</div>
-      ${noOptions}
-      <div class="question-actions">
-        <div class="left-actions">
-          <button class="btn check-btn" type="button" ${answered || !canAnswer ? 'disabled' : ''}>Check Answer</button>
-          <button class="btn ghost reveal-btn" type="button" ${!canAnswer ? 'disabled' : ''}>Show Answer</button>
-        </div>
-        <div class="right-actions">
-          <button class="btn ghost bookmark-btn ${isBookmarked(q.id) ? 'bookmarked' : ''}" type="button">${isBookmarked(q.id) ? '★ Bookmarked' : '☆ Bookmark'}</button>
-          <button class="btn explain explain-btn" type="button">Explain</button>
-        </div>
-      </div>
-      ${feedback}
-      ${reviewNotes}
-    </article>`;
-}
-
-function renderExamCard(q, index) {
-  const selected = state.examAnswers[q.id];
-  const submitted = state.examSubmitted;
-  const correctText = getOptionText(q, q.correctLetter);
-
-  const optionsHtml = (q.options || []).map(opt => {
-    let cls = 'option';
-    if (submitted && opt.label === q.correctLetter) cls += ' correct';
-    if (submitted && selected === opt.label && selected !== q.correctLetter) cls += ' wrong';
-
-    return `
-      <label class="${cls}">
-        <input type="radio" name="exam-${q.id}" value="${escapeHtml(opt.label)}" ${selected === opt.label ? 'checked' : ''} ${submitted ? 'disabled' : ''} />
-        <span class="letter">${escapeHtml(opt.label)}</span>
-        <span>${escapeHtml(opt.text)}</span>
-      </label>`;
-  }).join('');
-
-  const feedback = submitted
-    ? `<div class="feedback ${selected === q.correctLetter ? 'good' : 'bad'}">
-        ${selected === q.correctLetter ? '✅ Correct' : selected ? '❌ Wrong' : '⚠ Not answered'}
-        — সঠিক উত্তর: <strong>${escapeHtml(q.correctLetter)}) ${escapeHtml(correctText)}</strong>
-      </div>`
-    : '';
-
-  const explainBtn = submitted
-    ? `<button class="btn explain explain-btn" type="button">Explain</button>`
-    : '';
-
-  return `
-    <article class="mcq-card exam-card" data-id="${escapeHtml(q.id)}">
-      <div class="question-meta">
-        <span class="tag">Exam ${index + 1}</span>
-        <span class="tag">${escapeHtml(q.chapterTitle || '')}</span>
-        <span class="tag">Original: ${escapeHtml(q.id)}</span>
-      </div>
-      ${q.stimulus ? `<div class="stimulus">${escapeHtml(q.stimulus)}</div>` : ''}
-      <h2 class="question-title">${escapeHtml(q.question)}</h2>
-      <div class="options">${optionsHtml}</div>
-      <div class="question-actions">
-        <div class="left-actions">${submitted ? '<span class="tag gold">Answer revealed after submission</span>' : '<span class="tag">Answer hidden until submit</span>'}</div>
-        <div class="right-actions">${explainBtn}</div>
-      </div>
-      ${feedback}
-    </article>`;
-}
-
-function render() {
-  buildChapterCards();
-  updateScore();
-
-  if (state.mode === 'exam') {
-    $('practiceControls').hidden = true;
-    $('examIntro').hidden = true;
-    $('examToolbar').hidden = false;
-
-    if (!state.examQuestions.length) {
-      list.innerHTML = `<div class="card empty">No exam started yet.</div>`;
-      return;
-    }
-
-    list.innerHTML = state.examQuestions.map(renderExamCard).join('');
-    updateExamResult();
-    return;
-  }
-
-  setHeroForPractice();
-  $('practiceControls').hidden = false;
-  $('examIntro').hidden = false;
-  $('examToolbar').hidden = true;
-  $('examResult').hidden = true;
-
-  const data = filteredMcqs();
-
-  if (!data.length) {
-    list.innerHTML = `<div class="card empty">No MCQs found for this filter.</div>`;
-    return;
-  }
-
-  list.innerHTML = data.map(renderPracticeCard).join('');
-}
-
-function updateExamResult() {
-  if (!state.examSubmitted) {
-    $('examResult').hidden = true;
-    return;
-  }
-
-  const total = state.examQuestions.length;
-  const answered = Object.keys(state.examAnswers).length;
-  const correct = state.examQuestions.filter(q => state.examAnswers[q.id] === q.correctLetter).length;
-  const percent = Math.round((correct / Math.max(total, 1)) * 100);
-
-  const byChapter = state.chapters.map(ch => {
-    const qs = state.examQuestions.filter(q => q.chapterId === ch.id);
-    if (!qs.length) return '';
-    const chCorrect = qs.filter(q => state.examAnswers[q.id] === q.correctLetter).length;
-    return `<span class="tag">${escapeHtml(ch.shortTitle || ch.title)}: ${chCorrect}/${qs.length}</span>`;
-  }).join('');
-
-  $('examResult').hidden = false;
-  $('examResult').innerHTML = `
-    <div>
-      <span class="tag gold">Exam Result</span>
-      <h2>Your Score: <strong>${correct} / ${total}</strong> (${percent}%)</h2>
-      <p>Answered: ${answered}/${total}. Correct answers are now visible under every MCQ.</p>
-      <div class="chapter-stats" style="margin-top:14px">${byChapter}</div>
-    </div>
-  `;
-}
-
-function sampleBalancedExam() {
-  const eligible = state.allMcqs.filter(isExamEligible);
-  const chapterIds = state.chapters.map(c => c.id);
-  const target = Math.min(100, eligible.length);
-  const per = Math.floor(target / chapterIds.length);
-  let remainder = target % chapterIds.length;
-  let selected = [];
-
-  for (const id of chapterIds) {
-    const pool = eligible.filter(q => q.chapterId === id);
-    const take = Math.min(pool.length, per + (remainder > 0 ? 1 : 0));
-    remainder = Math.max(0, remainder - 1);
-    selected = selected.concat(shuffle(pool).slice(0, take));
-  }
-
-  if (selected.length < target) {
-    const used = new Set(selected.map(q => q.id));
-    const rest = shuffle(eligible.filter(q => !used.has(q.id)));
-    selected = selected.concat(rest.slice(0, target - selected.length));
-  }
-
-  return shuffle(selected).slice(0, target);
-}
-
-function startExam() {
-  if (state.mode === 'exam' && !state.examSubmitted && Object.keys(state.examAnswers).length) {
-    if (!confirm('Current exam progress will be lost. Start a new random exam?')) return;
-  }
-
-  state.mode = 'exam';
-  state.examQuestions = sampleBalancedExam();
-  state.examAnswers = {};
-  state.examSubmitted = false;
-  state.examStartedAt = Date.now();
-
-  $('modeLabel').textContent = '100 MCQ Mixed Exam';
-  $('pageTitle').textContent = 'Mixed Random Exam';
-  $('pageSubtitle').textContent = 'Answer first. Correct answers and Explain button will unlock after final submission.';
-  $('scoreLabel').textContent = 'Exam Progress';
-  $('examInfo').textContent = `${state.examQuestions.length} questions selected randomly from all chapters. Answers are hidden until submit.`;
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  render();
-}
-
-function submitExam() {
-  if (state.mode !== 'exam') return;
-  const unanswered = state.examQuestions.length - Object.keys(state.examAnswers).length;
-  if (unanswered > 0 && !confirm(`${unanswered} questions are unanswered. Submit anyway?`)) return;
-
-  state.examSubmitted = true;
-  $('scoreLabel').textContent = 'Final Score';
-  render();
-  $('examResult').scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-function openDialog() {
-  if (!$('explainDialog').open) $('explainDialog').showModal();
-}
-
-function hideFollowup() {
-  $('followupBox').hidden = true;
-  $('followupInput').value = '';
-  $('followupHistory').innerHTML = '';
-}
-
-function showPlainDialog(title, content) {
-  $('dialogTitle').textContent = title;
-  $('explainContent').innerHTML = `<div class="answer-block">${escapeHtml(content)}</div>`;
-  hideFollowup();
-  openDialog();
-}
-
-function showLoadingDialog(q) {
-  state.activeQuestion = q;
-  $('dialogTitle').textContent = 'Explanation ✨';
-  $('explainContent').innerHTML = `
-    <div class="cool-loader">
-      <div class="loader-orb" aria-hidden="true"></div>
-      <h3>Preparing a clear explanation<span class="loading-dots"></span></h3>
-      <p>AI teacher is checking the MCQ and making it easy for students.</p>
-    </div>`;
-  hideFollowup();
-  openDialog();
-}
-
-function showExplanationDialog(q, text) {
-  state.activeQuestion = q;
-  $('dialogTitle').textContent = `Explanation for ${q.id} ✨`;
-  $('explainContent').innerHTML = `<div class="answer-block">${escapeHtml(text)}</div>`;
-  $('followupBox').hidden = false;
-  $('followupInput').value = '';
-  $('followupHistory').innerHTML = '';
-  openDialog();
-  setTimeout(() => $('followupInput').focus(), 80);
-}
-
-function makePrompt(q) {
-  const options = (q.options || []).map(o => `${o.label}) ${o.text}`).join('\n');
-  return `তুমি একজন ধৈর্যশীল ICT শিক্ষক। নিচের MCQ টি বাংলা ভাষায় সহজভাবে ব্যাখ্যা কর।
-
-নিয়ম:
-- ৫ থেকে ৮ লাইনের মধ্যে রাখো।
-- প্রথমে সঠিক উত্তর বলো।
-- তারপর কেন উত্তরটি সঠিক, ধাপে ধাপে বোঝাও।
-- ভুল অপশনগুলো কেন ঠিক নয়, খুব সংক্ষেপে বলো।
-- যদি প্রশ্ন/উত্তরে অস্পষ্টতা থাকে, শিক্ষকের কাছে যাচাই করতে বলো।
-
-Chapter:
-${q.chapterTitle || 'N/A'}
-
-Context:
-${q.stimulus || 'N/A'}
-
-Question:
-${q.question}
-
-Options:
-${options || 'N/A'}
-
-Correct answer from teacher file:
-${q.correctLetter ? `${q.correctLetter}) ${getOptionText(q, q.correctLetter)}` : 'Need manual review'}
-`;
-}
-
-async function callExplainApi(prompt, questionId) {
-  const res = await fetch(window.EXPLAIN_API_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt, questionId })
-  });
-
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) {
-    const details = data.details || data.geminiError || data.cloudflareAIError || '';
-    throw new Error(data.error ? `${data.error}${details ? ` — ${details}` : ''}` : `Request failed: ${res.status}`);
-  }
-  return data.explanation || 'No explanation returned.';
-}
-
-async function explain(q) {
-  if (state.explanations[q.id]) {
-    showExplanationDialog(q, state.explanations[q.id]);
-    return;
-  }
-
-  if (!window.EXPLAIN_API_URL) {
-    showPlainDialog(
-      'Explanation setup needed',
-      'Explain API এখনো সেট করা হয়নি। config.js ফাইলে Cloudflare Worker URL বসান। API key কখনো static site-এ রাখবেন না।'
-    );
-    return;
-  }
-
-  showLoadingDialog(q);
-
-  try {
-    const text = await callExplainApi(makePrompt(q), q.id);
-    state.explanations[q.id] = text;
-    saveProgress();
-    showExplanationDialog(q, text);
-  } catch (err) {
-    showPlainDialog('Explanation failed', `Reason: ${err.message}\n\nCheck Worker URL, CORS origin, Gemini API key, and Workers AI binding.`);
-  }
-}
-
-async function askFollowup() {
-  const q = state.activeQuestion;
-  const studentQuestion = $('followupInput').value.trim();
-  if (!q || !studentQuestion) return;
-
-  if (!window.EXPLAIN_API_URL) {
-    showPlainDialog('Explanation setup needed', 'Explain API URL is missing in config.js.');
-    return;
-  }
-
-  const btn = $('askFollowupBtn');
-  const history = $('followupHistory');
-  const previousExplanation = state.explanations[q.id] || $('explainContent').innerText || '';
-
-  history.insertAdjacentHTML(
-    'beforeend',
-    `<div class="followup-item student"><strong>Student asked:</strong>\n${escapeHtml(studentQuestion)}</div>`
-  );
-
-  const loadingId = `followup-loading-${Date.now()}`;
-  history.insertAdjacentHTML(
-    'beforeend',
-    `<div id="${loadingId}" class="followup-item loading">Thinking<span class="loading-dots"></span></div>`
-  );
-
-  btn.disabled = true;
-  btn.textContent = 'Asking...';
-
-  try {
-    const followupPrompt = `তুমি একজন ধৈর্যশীল ICT শিক্ষক। একজন শিক্ষার্থী MCQ ব্যাখ্যার পরেও একটি follow-up প্রশ্ন করেছে।
-
-মূল MCQ তথ্য:
-${makePrompt(q)}
-
-আগের ব্যাখ্যা:
-${previousExplanation}
-
-শিক্ষার্থীর প্রশ্ন:
-${studentQuestion}
-
-এখন শিক্ষার্থীর follow-up প্রশ্নের উত্তর সহজ বাংলায় দাও। খুব বড় করবে না। প্রয়োজন হলে ছোট উদাহরণ দাও।`;
-
-    const answer = await callExplainApi(followupPrompt, q.id);
-    const loadingEl = document.getElementById(loadingId);
-    if (loadingEl) {
-      loadingEl.outerHTML = `<div class="followup-item ai"><strong>AI replied:</strong>\n${escapeHtml(answer)}</div>`;
-    }
-    $('followupInput').value = '';
-  } catch (err) {
-    const loadingEl = document.getElementById(loadingId);
-    if (loadingEl) {
-      loadingEl.outerHTML = `<div class="followup-item ai"><strong>Failed:</strong> ${escapeHtml(err.message)}</div>`;
-    }
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Ask Explanation';
-  }
-}
-
-list.addEventListener('click', (e) => {
-  const card = e.target.closest('.mcq-card');
-  if (!card) return;
-
-  const pool = state.mode === 'exam' ? state.examQuestions : state.allMcqs;
-  const q = pool.find(item => String(item.id) === card.dataset.id);
-  if (!q) return;
-
-  if (e.target.matches('input[type="radio"]')) {
-    if (state.mode === 'exam' && !state.examSubmitted) {
-      state.examAnswers[q.id] = e.target.value;
-      updateScore();
-      return;
-    }
-  }
-
-  if (e.target.closest('.check-btn')) {
-    const chosen = card.querySelector('input[type="radio"]:checked');
-    if (!chosen) {
-      const old = card.querySelector('.feedback');
-      if (old) old.remove();
-      card.insertAdjacentHTML('beforeend', '<div class="feedback bad">একটি অপশন নির্বাচন করুন।</div>');
-      return;
-    }
-
-    state.answers[q.id] = chosen.value;
-    saveProgress();
-    render();
-  }
-
-  if (e.target.closest('.reveal-btn')) {
-    state.answers[q.id] = q.correctLetter || 'unknown';
-    saveProgress();
-    render();
-  }
-
-  if (e.target.closest('.bookmark-btn')) {
-    const id = String(q.id);
-    state.bookmarks = isBookmarked(id)
-      ? state.bookmarks.filter(x => x !== id)
-      : [...state.bookmarks, id];
-    saveProgress();
-    render();
-  }
-
-  if (e.target.closest('.explain-btn')) {
-    explain(q);
-  }
+function renderSetup(){const active=state.exam.questions?.length&&!state.exam.submitted;return header('নিজের প্রস্তুতি যাচাই করো','সব অধ্যায়ের প্রশ্নে একটি মডেল টেস্ট।')+`<div class="exam-setup">${active?`<div class="resume-card"><div><strong>তোমার একটি টেস্ট চলছে</strong><p>${bn(Object.keys(state.exam.answers).length)} / ${bn(state.exam.questions.length)}টি উত্তর দিয়েছ</p></div><button class="button secondary" data-action="resume">চালিয়ে যাও</button></div>`:state.exam.submitted?'<div class="resume-card"><strong>শেষ টেস্টের ফলাফল সেভ আছে</strong><button class="button secondary" data-action="resume">ফলাফল দেখো</button></div>':''}<section class="setup-card"><div class="setup-top"><div class="stat-icon">${icon('exam')}</div><div><h2>মিশ্র মডেল টেস্ট</h2><p>নতুন প্রশ্ন। নতুন করে নিজেকে যাচাই।</p></div></div><div class="exam-facts"><div>${icon('book')}<strong>সব অধ্যায়</strong>মিলিয়ে প্রশ্ন বাছাই</div><div>${icon('clock')}<strong>নিজের গতিতে</strong>সময়সীমা নেই</div><div>${icon('shield')}<strong>শেষে ফলাফল</strong>জমার পর উত্তর</div></div><span class="setup-label">কতটি প্রশ্নে টেস্ট দেবে?</span><div class="segmented" aria-label="প্রশ্নের সংখ্যা">${[20,50,100].map(n=>`<button data-size="${n}" class="${state.examSize===n?'active':''}" aria-pressed="${state.examSize===n}">${bn(n)}</button>`).join('')}</div><button class="button primary" data-action="start-exam">${icon('play')}টেস্ট শুরু করো</button><p class="small muted" style="margin-top:17px;text-align:center">অনিশ্চিত প্রশ্ন এই টেস্টে রাখা হয় না।</p></section></div>`;}
+function renderResult(){const qs=state.exam.questions.map(id=>state.questions.find(q=>q.id===id));const correct=qs.filter(q=>state.exam.answers[q.id]===q.correctLetter).length,answered=Object.keys(state.exam.answers).length;const percent=Math.round(correct/qs.length*100);return `<section class="result-card"><div class="score-ring" style="--score:${percent}"><div class="score-ring-inner">${bn(percent)}%<small>তোমার স্কোর</small></div></div><div class="result-copy"><h2>টেস্ট শেষ। এবার দেখে শেখো।</h2><div class="result-stats"><div><strong>${bn(correct)}</strong><span>সঠিক</span></div><div><strong>${bn(answered-correct)}</strong><span>ভুল</span></div><div><strong>${bn(qs.length-answered)}</strong><span>উত্তর বাকি</span></div></div></div><div class="result-actions"><button class="button soft" data-view="exam">নতুন টেস্ট</button></div></section><div class="exam-review-filters">${Object.entries({all:'সব উত্তর',wrong:'ভুলগুলো',unanswered:'উত্তর বাকি',correct:'সঠিকগুলো'}).map(([v,t])=>`<button data-exam-filter="${v}" class="${state.examFilter===v?'active':''}">${t}</button>`).join('')}</div>`;}
+function renderExam(){return header(state.exam.submitted?'টেস্টের ফলাফল':'মডেল টেস্ট',`${bn(state.exam.questions.length)}টি প্রশ্ন · ${state.exam.submitted?'উত্তরগুলো মিলিয়ে দেখো':'চাইলে জমা দেওয়ার আগে উত্তর বদলাতে পারো'}`,`<div class="exam-status"><span class="timer">${icon('clock')}<span id="elapsed"></span></span><button class="button ${state.exam.submitted?'secondary':'primary'}" ${state.exam.submitted?'data-view="exam"':'data-action="submit-exam"'}>${state.exam.submitted?'নতুন টেস্ট':'টেস্ট জমা দাও'}</button></div>`)+(state.exam.submitted?renderResult():'')+'<div id="questionArea"></div>';}
+function render(){if(!state.loaded)return;$('viewLabel').textContent=({home:'ড্যাশবোর্ড',practice:'অনুশীলন',saved:'সংরক্ষিত',exam:'মডেল টেস্ট',examRun:'মডেল টেস্ট'})[state.view];document.querySelectorAll('.main-nav [data-view]').forEach(el=>{const active=el.dataset.view===(state.view==='examRun'?'exam':state.view);el.classList.toggle('active',active);if(active)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current');});$('savedBadge').textContent=state.bookmarks.length;$('main').innerHTML=state.view==='home'?renderHome():state.view==='exam'?renderSetup():state.view==='examRun'?renderExam():renderPractice();if($('questionArea'))drawQuestion();tick();}
+function navigate(view,reset=true){if(!state.loaded)return;state.feedbackId=null;state.view=view;if(reset){state.index=0;state.chapter='all';state.topic='all';state.status='all';state.search='';}history.replaceState(null,'',`#${view==='examRun'?'exam':view}`);render();window.scrollTo({top:0,behavior:'instant'});$('main').focus({preventScroll:true});}
+function shuffled(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function sampleExam(size){const groups=state.chapters.map(ch=>shuffled(state.questions.filter(q=>q.chapterId===ch.id&&usable(q))));const picked=[];while(picked.length<size&&groups.some(g=>g.length)){for(const g of shuffled(groups)){if(g.length&&picked.length<size)picked.push(g.pop());}}return shuffled(picked).map(q=>q.id);}
+async function startExam(){if(state.exam.questions?.length&&!state.exam.submitted&&!await confirmAction('নতুন টেস্ট শুরু করবে?','চলমান টেস্টের উত্তর মুছে নতুন প্রশ্ন নেওয়া হবে।','নতুন টেস্ট'))return;const ids=sampleExam(state.examSize);if(!ids.length){toast('টেস্টের জন্য প্রশ্ন পাওয়া যায়নি।');return;}state.exam={questions:ids,answers:{},started:Date.now(),submitted:false,cursor:ids[0]};state.examFilter='all';state.index=0;saveExam();navigate('examRun');}
+async function submitExam(){if(state.exam.submitted)return;const left=state.exam.questions.length-Object.keys(state.exam.answers).length;if(!await confirmAction('টেস্ট জমা দেবে?',left?`${bn(left)}টি প্রশ্নের উত্তর বাকি। জমা দেওয়ার পর উত্তর বদলানো যাবে না।`:'জমা দেওয়ার পর ফলাফল ও সঠিক উত্তর দেখা যাবে।','জমা দাও'))return;state.exam.submitted=true;state.exam.finished=Date.now();state.examFilter='all';state.index=0;saveExam();render();window.scrollTo({top:0,behavior:'smooth'});$('main').focus({preventScroll:true});}
+function tick(){if(!$('elapsed')||!state.exam.started)return;const seconds=Math.max(0,Math.floor(((state.exam.finished||Date.now())-state.exam.started)/1000));$('elapsed').textContent=`${bn(Math.floor(seconds/60))}:${String(seconds%60).padStart(2,'0').replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d])}`;}
+setInterval(tick,1000);
+let searchTimer;
+$('main').addEventListener('input',e=>{if(e.target.id==='searchInput'){state.feedbackId=null;state.search=e.target.value;state.index=0;clearTimeout(searchTimer);searchTimer=setTimeout(()=>{if($('questionArea'))drawQuestion();},120);}});
+$('main').addEventListener('change',e=>{const el=e.target;if(['chapterFilter','topicFilter','statusFilter'].includes(el.id)){state.feedbackId=null;state.index=0;if(el.id==='chapterFilter'){state.chapter=el.value;state.topic='all';}if(el.id==='topicFilter')state.topic=el.value;if(el.id==='statusFilter')state.status=el.value;render();$(el.id)?.focus();return;}if(el.matches('input[name="answer"]')){const q=currentPool()[state.index];if(!q||!usable(q))return;if(state.view==='examRun'){if(state.exam.submitted)return;state.exam.answers[q.id]=el.value;saveExam();}else{state.drafts[q.id]=el.value;writeStore('draftsV2',state.drafts);const b=$('main').querySelector('[data-action="check"]');if(b)b.disabled=false;}const nav=$('main').querySelector('.navigator');if(nav){nav.outerHTML=navigator(currentPool());$('main').querySelector('.navigator').addEventListener('toggle',e=>state.navOpen=e.target.open);}}});
+document.addEventListener('click',async e=>{const el=e.target.closest('button,a');if(!el)return;if(el.dataset.view){navigate(el.dataset.view);return;}if(el.matches('.brand')){e.preventDefault();navigate('home');return;}if(el.dataset.chapter){navigate('practice');state.chapter=el.dataset.chapter;render();return;}if(el.dataset.size){state.examSize=Number(el.dataset.size);render();$('main').querySelector(`[data-size="${state.examSize}"]`).focus();return;}if(el.dataset.jump!==undefined){const next=currentPool()[Number(el.dataset.jump)]?.id;state.feedbackId=null;state.index=Math.max(0,currentPool().findIndex(item=>item.id===next));drawQuestion(true);$('questionTitle').scrollIntoView({block:'center',behavior:'smooth'});return;}if(el.dataset.examFilter){state.examFilter=el.dataset.examFilter;state.index=0;render();return;}const action=el.dataset.action;if(!action)return;
+ if(action==='continue'){const id=state.last.id;navigate('practice');const pool=practicePool();state.index=Math.max(0,pool.findIndex(q=>q.id===id));drawQuestion();return;}
+ if(action==='review'){navigate('practice');state.status='review';render();return;}
+ if(action==='clear-filters'){if(state.view==='examRun'){state.examFilter='all';state.index=0;render();}else navigate('practice');return;}
+ if(action==='start-exam'){await startExam();return;}if(action==='submit-exam'){await submitExam();return;}
+ if(action==='resume'){const cursor=state.exam.cursor;state.examFilter='all';navigate('examRun');state.index=Math.max(0,examPool().findIndex(q=>q.id===cursor));drawQuestion();return;}
+ if(action==='settings'){$('settingsDialog').showModal();return;}
+ const q=currentPool()[state.index];if(!q)return;
+ if(action==='next'||action==='previous'){const next=currentPool()[state.index+(action==='next'?1:-1)]?.id;state.feedbackId=null;state.index=Math.max(0,currentPool().findIndex(item=>item.id===next));drawQuestion(true);$('questionTitle').scrollIntoView({block:'center',behavior:'smooth'});return;}
+ if(action==='bookmark'){state.bookmarks=bookmarked(q.id)?state.bookmarks.filter(id=>id!==q.id):[...state.bookmarks,q.id];savePractice();$('savedBadge').textContent=state.bookmarks.length;toast(bookmarked(q.id)?'প্রশ্ন সংরক্ষণ করা হয়েছে':'সংরক্ষিত তালিকা থেকে সরানো হয়েছে');drawQuestion();return;}
+ if(!usable(q))return;
+ if(action==='check'&&state.drafts[q.id]){state.feedbackId=q.id;state.answers[q.id]=state.drafts[q.id];delete state.drafts[q.id];savePractice();drawQuestion();toast(state.answers[q.id]===q.correctLetter?'সঠিক উত্তর!':'উত্তরটি মিলিয়ে দেখো।');}
+ if(action==='reveal'){if(!state.revealed.includes(q.id))state.revealed.push(q.id);delete state.drafts[q.id];savePractice();drawQuestion();}
+ if(action==='retry'){state.feedbackId=q.id;delete state.answers[q.id];delete state.drafts[q.id];state.revealed=state.revealed.filter(id=>id!==q.id);savePractice();drawQuestion(true);}
+ if(action==='explain')explain(q);
 });
+$('fontBtn').onclick=()=>{const on=document.documentElement.classList.toggle('large-text');$('fontBtn').setAttribute('aria-pressed',on);$('fontBtn').setAttribute('aria-label',on?'লেখা স্বাভাবিক আকারে আনুন':'লেখা বড় করুন');writeStore('largeText',on);};
+if(readStore('largeText',false)){$('fontBtn').click();}
+$('settingsBtn').onclick=()=>$('settingsDialog').showModal();$('closeSettings').onclick=()=>$('settingsDialog').close();
+$('resetBtn').onclick=async()=>{if(!await confirmAction('অনুশীলনের অগ্রগতি মুছবে?','সেভ করা উত্তর ও দেখা উত্তর মুছে যাবে। সংরক্ষিত প্রশ্ন ও টেস্ট থাকবে।','অগ্রগতি মুছুন'))return;state.answers={};state.drafts={};state.revealed=[];savePractice();$('settingsDialog').close();render();toast('অনুশীলনের অগ্রগতি মুছে দেওয়া হয়েছে');};
+let apiController=null,activeQuestion=null,requestSequence=0;
+$('closeDialog').onclick=()=>$('explainDialog').close();$('explainDialog').addEventListener('close',()=>{requestSequence++;apiController?.abort();activeQuestion=null;});
+async function callExplainApi(prompt,questionId){if(!window.EXPLAIN_API_URL)throw new Error('ব্যাখ্যার সেবা এখন সংযুক্ত নেই। পরে আবার চেষ্টা করো।');apiController?.abort();const controller=new AbortController();apiController=controller;const timeout=setTimeout(()=>controller.abort(),30000);try{const res=await fetch(window.EXPLAIN_API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt,questionId}),signal:controller.signal});const data=await res.json().catch(()=>({}));if(!res.ok)throw new Error(res.status===429?'একটু বিরতি দিয়ে আবার চেষ্টা করো।':'ব্যাখ্যার সেবা এখন সাড়া দিচ্ছে না। পরে আবার চেষ্টা করো।');if(typeof data.explanation!=='string'||!data.explanation.trim())throw new Error('ব্যাখ্যা পাওয়া যায়নি। আবার চেষ্টা করো।');return data.explanation;}catch(err){if(err.name==='AbortError')throw new Error('সময় বেশি লাগছে। আবার চেষ্টা করো।');if(err instanceof TypeError)throw new Error('সংযোগ পাওয়া যায়নি। ইন্টারনেট দেখে আবার চেষ্টা করো।');throw err;}finally{clearTimeout(timeout);}}
+function promptFor(q){return `তুমি একজন ধৈর্যশীল ICT শিক্ষক। ৫–৮ লাইনে সহজ বাংলায় প্রশ্নটি ব্যাখ্যা করো। সঠিক উত্তর, যুক্তি ও অন্য অপশনগুলো ভুল হওয়ার কারণ সংক্ষেপে বলো। উৎসের উত্তর ভুল বা অস্পষ্ট মনে হলে তা স্পষ্ট করো।\nঅধ্যায়: ${q.chapterTitle}\nউদ্দীপক: ${q.stimulus||'নেই'}\nপ্রশ্ন: ${q.question}\n${q.options.map(o=>`${o.label}) ${o.text}`).join('\n')}\nউৎসের উত্তর: ${q.correctLetter}) ${answerText(q)}`;}
+function showExplanation(text){$('explainContent').innerHTML=`<div class="answer-block">${escapeHtml(text)}</div><p class="ai-note">AI ব্যাখ্যায় ভুল থাকতে পারে। পাঠ্যবইয়ের সাথে মিলিয়ে নাও।</p>`;$('followupBox').hidden=false;}
+async function explain(q){if(state.view==='examRun'&&!state.exam.submitted)return;activeQuestion=q;const seq=++requestSequence;$('dialogTitle').textContent='সহজ ব্যাখ্যা';$('followupBox').hidden=true;$('followupInput').value='';$('followupHistory').innerHTML='';$('askFollowupBtn').disabled=false;$('askFollowupBtn').textContent='জিজ্ঞেস করো';$('explainContent').innerHTML='<div class="loading-state"><span class="spinner"></span><p>ব্যাখ্যা তৈরি হচ্ছে…</p></div>';if(!$('explainDialog').open)$('explainDialog').showModal();if(state.explanations[q.id]){showExplanation(state.explanations[q.id]);return;}try{const text=await callExplainApi(promptFor(q),q.id);state.explanations[q.id]=text;writeStore('explanationsV2',state.explanations);if(seq===requestSequence&&$('explainDialog').open)showExplanation(text);}catch(err){if(seq!==requestSequence||!$('explainDialog').open)return;$('explainContent').innerHTML=`<p>${escapeHtml(err.message)}</p><button id="retryExplain" class="button soft" style="margin-top:16px">আবার চেষ্টা</button>`;$('retryExplain').onclick=()=>explain(q);}}
+$('followupBox').onsubmit=async e=>{e.preventDefault();const text=$('followupInput').value.trim();const q=activeQuestion;if(!q||!text||$('askFollowupBtn').disabled)return;const seq=requestSequence;const btn=$('askFollowupBtn');btn.disabled=true;btn.textContent='অপেক্ষা করো…';const row=document.createElement('div');row.className='followup-item student';row.textContent=text;$('followupHistory').append(row);const reply=document.createElement('div');reply.className='followup-item';reply.textContent='উত্তর তৈরি হচ্ছে…';$('followupHistory').append(reply);try{const answer=await callExplainApi(`${promptFor(q)}\nআগের ব্যাখ্যা: ${state.explanations[q.id]||''}\nশিক্ষার্থীর প্রশ্ন: ${text}\nসংক্ষিপ্ত সহজ বাংলায় বোঝাও।`,q.id);if(seq===requestSequence){reply.textContent=answer;$('followupInput').value='';}}catch(err){if(seq===requestSequence)reply.textContent=err.message;}finally{if(seq===requestSequence){btn.disabled=false;btn.textContent='জিজ্ঞেস করো';}}};
+async function init(){const res=await fetch('data/mcqs.json');if(!res.ok)throw new Error('প্রশ্ন লোড করা যায়নি।');const data=await res.json();if(!Array.isArray(data.chapters)||!Array.isArray(data.mcqs))throw new Error('প্রশ্নের ফাইলটি সঠিক নয়।');state.chapters=data.chapters;const ids=new Set();state.questions=data.mcqs.map(q=>{if(!q.id||ids.has(q.id)||typeof q.question!=='string')throw new Error('প্রশ্নের তথ্য যাচাই করা প্রয়োজন।');ids.add(q.id);const options=Array.isArray(q.options)?q.options:[];return {...q,options,needsReview:!!q.needsReview||options.length<2||!options.some(o=>o.label===q.correctLetter)};});
+ const valid=id=>ids.has(id);state.bookmarks=[...new Set(state.bookmarks.filter(id=>typeof id==='string'&&valid(id)))];state.revealed=state.revealed.filter(valid);state.answers=Object.fromEntries(Object.entries(state.answers).filter(([id,a])=>state.questions.some(q=>q.id===id&&usable(q)&&q.options.some(o=>o.label===a))));
 
-$('chapterGrid').addEventListener('click', (e) => {
-  const card = e.target.closest('.chapter-card');
-  if (!card) return;
-  state.activeChapter = card.dataset.chapter;
-  $('chapterFilter').value = state.activeChapter;
-  state.mode = 'practice';
-  render();
-  $('practiceControls').scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
-
-$('homeBtn').addEventListener('click', () => {
-  state.mode = 'practice';
-  state.activeChapter = 'all';
-  $('chapterFilter').value = 'all';
-  $('searchInput').value = '';
-  $('topicFilter').value = 'all';
-  $('statusFilter').value = 'all';
-  state.filters = { search: '', topic: 'all', status: 'all' };
-  render();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-$('searchInput').addEventListener('input', (e) => {
-  state.filters.search = e.target.value;
-  render();
-});
-
-$('chapterFilter').addEventListener('change', (e) => {
-  state.activeChapter = e.target.value;
-  state.mode = 'practice';
-  render();
-});
-
-$('topicFilter').addEventListener('change', (e) => {
-  state.filters.topic = e.target.value;
-  render();
-});
-
-$('statusFilter').addEventListener('change', (e) => {
-  state.filters.status = e.target.value;
-  render();
-});
-
-$('resetBtn').addEventListener('click', () => {
-  if (!confirm('Reset all saved practice answers, bookmarks, and explanations?')) return;
-  state.answers = {};
-  state.bookmarks = [];
-  state.explanations = {};
-  saveProgress();
-  render();
-});
-
-$('startExamBtn').addEventListener('click', startExam);
-$('startExamBtnTop').addEventListener('click', startExam);
-$('newExamBtn').addEventListener('click', startExam);
-$('submitExamBtn').addEventListener('click', submitExam);
-
-$('closeDialog').addEventListener('click', () => $('explainDialog').close());
-$('askFollowupBtn').addEventListener('click', askFollowup);
-$('followupInput').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) askFollowup();
-});
-
-async function init() {
-  const res = await fetch('data/mcqs.json');
-  const data = await res.json();
-
-  state.chapters = data.chapters || [];
-  state.allMcqs = data.mcqs || [];
-  state.mcqs = state.allMcqs;
-
-  buildFilters();
-  render();
-}
-
-init().catch(err => {
-  list.innerHTML = `<div class="card empty">Failed to load MCQ data: ${escapeHtml(err.message)}</div>`;
-});
+ if(!Array.isArray(state.exam.questions)||!state.exam.questions.length||new Set(state.exam.questions).size!==state.exam.questions.length||state.exam.questions.some(id=>!state.questions.some(q=>q.id===id&&usable(q)))||!state.exam.answers||typeof state.exam.answers!=='object'||Array.isArray(state.exam.answers)||!Number.isFinite(state.exam.started)){state.exam={};}else{state.exam.answers=Object.fromEntries(Object.entries(state.exam.answers).filter(([id,a])=>state.exam.questions.includes(id)&&state.questions.find(q=>q.id===id).options.some(o=>o.label===a)));}
+ state.loaded=true;const route=location.hash.slice(1);state.view=['home','practice','saved','exam'].includes(route)?route:'home';render();}
+init().catch(()=>{$('main').innerHTML=empty('প্রশ্ন লোড করা যায়নি','ইন্টারনেট সংযোগ দেখে পেজটি আবার লোড করো। কম্পিউটারে চালাতে START.bat ব্যবহার করো।','<button class="button primary" id="reloadBtn">আবার লোড করো</button>');$('reloadBtn').onclick=()=>location.reload();});
